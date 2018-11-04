@@ -5,13 +5,13 @@
 }
 #custom-bootstrap-menu.navbar-default {
     font-size: 16px;
-    background-color: rgba(135, 158, 134, 1);
+    background-color: #e4a84e;
     border-width: 1px;
     border-radius: 4px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: rgba(255, 250, 250, 1);
-    background-color: rgba(248, 248, 248, 0);
+    background-color: #e4a84e;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
@@ -37,4 +37,11 @@
 #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
 #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #879e86;
+}
+
+body{
+    background-repeat: repeat;
+    background-position: center center;
+    background-image: url(parquet.jpg);
+  background-color: rgba(59, 227, 59, 1);  
 }
