@@ -2,31 +2,47 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Futzal
+    %title Официальный сайт комитета по футзалу Карагандинской областной ассоциации футбола
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
-      .container-fluid
-        .navbar-header
-          %a.navbar-brand{:href => "#"} Brand
-          %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
-            %span.sr-only Toggle navigation
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-        .collapse.navbar-collapse.navbar-menubuilder
-          %ul.nav.navbar-nav.navbar-left
-            %li
-              %a{:href => "/"} Home
-            %li
-              %a{:href => "/products"} Products
-            %li
-              %a{:href => "/about-us"} About Us
-            %li.active
-              %a{:href => "/contact"} Contact Us
+    .wrapper
+      .content
+    
+        #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
+          .container-fluid
+            .navbar-header
+              %a.navbar-brand{:href => "#"} Brand
+              %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+            .collapse.navbar-collapse.navbar-menubuilder
+              %ul.nav.navbar-nav.navbar-left
+                %li
+                  %a{:href => "/"} Главная
+                %li
+                  %a{:href => "/document"} Документы
+                %li
+                  %a{:href => "/referies"} Судьи
+                %li.active
+                  %a{:href => "/teams"} Команды
+                %li
+                  %a{:href => "/tables"} Таблицы
+                %li
+                  %a{:href => "/items"} Новости
+                %li
+                  %a{:href => "/contacts"} Контакты
+            
+        .row
+          .col-md-10.col-md-offset-1
+            = yield
+      .footer
+        .row
+          .col-md-12
+            .text-center
+              \&#xA9; 2018 Все права защищены. Копирование допускается с указанием на первоисточник.
 
-
-    = yield

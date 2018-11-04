@@ -5,24 +5,28 @@
 }
 #custom-bootstrap-menu.navbar-default {
     font-size: 16px;
-    background-color: #e4a84e;
+    //background-color: #e4a84e;
+    background-color: rgba(59, 227, 59, 1);
     border-width: 1px;
     border-radius: 4px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: rgba(255, 250, 250, 1);
-    background-color: #e4a84e;
+    //background-color: #e4a84e;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
-    color: rgba(59, 227, 59, 1);
-    background-color: rgba(248, 248, 248, 0);
+    //color: rgba(59, 227, 59, 1);
+    //background-color: rgba(248, 248, 248, 0);
+    background-color: #e4a84e;
+    color: rgba(255, 250, 250, 1);
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
     color: rgba(255, 250, 250, 1);
-    background-color: rgba(59, 227, 59, 1);
+    //background-color: rgba(59, 227, 59, 1);
+    background-color: #e4a84e;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle {
     border-color: #3be33b;
@@ -45,3 +49,35 @@ body{
     background-image: url(parquet.jpg);
   background-color: rgba(59, 227, 59, 1);  
 }
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  position: relative;
+  min-height: 100%;
+}
+.content {
+  padding-bottom: 35px;
+}
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+.footer{
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-image: url(ball.jpg);
+   background-size: 30px 30px;
+  background-color: rgba(59, 227, 59, 1);  
+}
+
