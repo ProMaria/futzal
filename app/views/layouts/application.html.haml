@@ -14,7 +14,8 @@
         #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
           .container-fluid
             .navbar-header
-              %a.navbar-brand{:href => "#"} Brand
+              %a.navbar-brand{:href => "#"} 
+                =image_tag("brand.png", size: "45")
               %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
                 %span.sr-only Toggle navigation
                 %span.icon-bar
@@ -36,6 +37,21 @@
                   %a{:href => "/items"} Новости
                 %li
                   %a{:href => "/contacts"} Контакты
+                
+            
+              %ul.nav.navbar-nav.navbar-right
+                %li.nav-item
+                  %a.nav-link{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
+                    =image_tag("fifa.png", size: "35")
+
+                %li.nav-item
+                  %a.nav-link{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
+                    =image_tag("uefa.png", size: "35")
+                %li.nav-item
+                  %a.nav-link{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
+                    =image_tag("koaf.png", size: "35")
+           
+                
             
         .row
           .col-md-10.col-md-offset-1

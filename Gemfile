@@ -65,3 +65,5 @@ gem 'bootstrap', '~> 4.1.3'
 
 gem 'sprockets-rails', '>=2.3.2'
 gem 'jquery-rails'
+gem "paperclip", "~> 5.1"
+gem 'rails_admin', '~> 1.3'

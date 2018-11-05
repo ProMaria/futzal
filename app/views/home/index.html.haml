@@ -1,6 +1,17 @@
 %ul.list-group
   %li.list-group-item
     %h2 Новости
+    -if @items.present?
+      %ul.list-group
+        -@items.each do |item|
+          %li.list-group-item
+            %h3=item.title
+            .row
+              .col-md-3
+              
+                .text-center= image_tag item.image.url(:small) if item.image.present?
+              .col-md-9
+                .pull-left=item.body
   %li.list-group-item 
     %h2 Результаты прошедшего тура
   %li.list-group-item 
