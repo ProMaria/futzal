@@ -27,12 +27,12 @@
   .panel-body
     -if @results.present?
       %ul.list-group
-        %table.table.table-bordered
-          %tr
-            %td.text-center Дата и время
-            %td.text-center Хозяин 
-            %td.text-center Гость
-            %td.text-center Счет
+        %table.table.table-hover
+          %tr.active
+            %td Дата и время
+            %td Хозяин 
+            %td Гость
+            %td Счет
           -@results.each do |result|
             %tr
               %td=l result.timestamp, format: :short
@@ -45,8 +45,8 @@
   .panel-body
     -if @schedule.present?
       %ul.list-group
-        %table.table.table-bordered
-          %tr
+        %table.table.table-hover
+          %tr.active
             %td Дата и время
             %td Хозяин 
             %td Гость
