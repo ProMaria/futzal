@@ -1,36 +1,48 @@
-%ul.list-group
-  %li.list-group-item
-    %h2 Новости
+.panel.panel-success
+  .panel-heading
+    Новости
+  .panel-body
     -if @items.present?
       %ul.list-group
         -@items.each do |item|
           %li.list-group-item
-            %h3=item.title
+            
             .row
               .col-md-3
               
                 .text-center= image_tag item.image.url(:small) if item.image.present?
               .col-md-9
-                .pull-left=item.body_preview
-  %li.list-group-item 
-    %h2 Результаты прошедшего тура
+               
+                  
+                %h3.text-center=link_to item.title, items_path(item), target: :blank
+                %p=item.body_preview
+                %p.pull-right
+                  %i.fa.fa-home
+                  Просмотров: #{item.count_views}
+                  =link_to 'Читать', items_path(item), class: 'btn btn-info btn-sm' 
+
+.panel.panel-success
+  .panel-heading
+    Результаты прошедшего тура
+  .panel-body
     -if @results.present?
       %ul.list-group
         %table.table.table-bordered
           %tr
-            %td Дата и время
-            %td Хозяин 
-            %td Гость
-            %td Счет
+            %td.text-center Дата и время
+            %td.text-center Хозяин 
+            %td.text-center Гость
+            %td.text-center Счет
           -@results.each do |result|
             %tr
-              %td=result.timestamp
+              %td=result.timestamp.strftime('%d %b %Y, %H:%m')
               %td=result.home_team.name
               %td=result.guest_team.name
               %td=result.result
-            
-  %li.list-group-item 
-    %h2 Расписание следующего тура
+.panel.panel-success
+  .panel-heading
+    Расписание следующего тура
+  .panel-body
     -if @schedule.present?
       %ul.list-group
         %table.table.table-bordered
@@ -41,13 +53,17 @@
            
           -@schedule.each do |schedule|
             %tr
-              %td=schedule.timestamp
+              %td=schedule.timestamp.strftime('%d %b %Y, %H:%m')
               %td=schedule.home_team.name
               %td=schedule.guest_team.name
+
               
- 
-
-
-
-
-
+              
+              
+              
+              
+              
+              
+              
+              
+              

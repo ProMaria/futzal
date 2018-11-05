@@ -11,11 +11,34 @@
     .wrapper
       .content
     
+        #label_bar
+          .row
+            .col-md-6
+              .pull-left
+                %a{:href => "/", title: 'На главную'}
+                  =image_tag("brand.png", size: "75")
+                Комитет по футзалу Карагандинской областной ассоциации футбола
+            .col-md-6
+              .well.pull-right
+            
+          
+                
+                
+                %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
+                  =image_tag("fifa.png", size: "55")
+
+                
+                %a{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
+                  =image_tag("uefa.png", size: "55")
+                
+                %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
+                  =image_tag("koaf.png", size: "55")
+           
         #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
           .container-fluid
             .navbar-header
               %a.navbar-brand{:href => "#"} 
-                =image_tag("brand.png", size: "45")
+
               %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
                 %span.sr-only Toggle navigation
                 %span.icon-bar
@@ -24,32 +47,35 @@
             .collapse.navbar-collapse.navbar-menubuilder
               %ul.nav.navbar-nav.navbar-left
                 %li
-                  %a{:href => "/"} Главная
+                  =link_to root_path do                    
+                    %i.fa.fa-home
+                    Главная
                 %li
-                  %a{:href => "/document"} Документы
+                  =link_to '#' do
+                    %i.fa.fa-book
+                    Документы
                 %li
-                  %a{:href => "/referies"} Судьи
+                  =link_to root_path do                    
+                    %i.fa.fa-id-card
+                    Судьи
                 %li.active
-                  %a{:href => "/teams"} Команды
+                  =link_to root_path do                    
+                    %i.fa.fa-id-card
+                    Команды
                 %li
-                  %a{:href => "/tables"} Таблицы
+                  =link_to root_path do                    
+                    %i.fa.fa-table
+                    Таблицы
                 %li
-                  %a{:href => "/items"} Новости
+                  =link_to root_path do                    
+                    %i.fa.fa-file
+                    Новости
                 %li
-                  %a{:href => "/contacts"} Контакты
+                  =link_to root_path do                    
+                    %i.fa.fa-phone
+                    Контакты
                 
             
-              %ul.nav.navbar-nav.navbar-right
-                %li.nav-item
-                  %a.nav-link{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
-                    =image_tag("fifa.png", size: "35")
-
-                %li.nav-item
-                  %a.nav-link{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
-                    =image_tag("uefa.png", size: "35")
-                %li.nav-item
-                  %a.nav-link{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
-                    =image_tag("koaf.png", size: "35")
            
                 
             
