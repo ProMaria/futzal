@@ -35,7 +35,7 @@
             %td.text-center Счет
           -@results.each do |result|
             %tr
-              %td=result.timestamp.strftime('%d %b %Y, %H:%m')
+              %td=l result.timestamp, format: :short
               %td=result.home_team.name
               %td=result.guest_team.name
               %td=result.result
@@ -53,7 +53,7 @@
            
           -@schedule.each do |schedule|
             %tr
-              %td=schedule.timestamp.strftime('%d %b %Y, %H:%m')
+              %td=l schedule.timestamp, format: :short
               %td=schedule.home_team.name
               %td=schedule.guest_team.name
 

@@ -1,0 +1,11 @@
+ru:
+  activerecord:
+    models:
+      item: Новость
+    attributes:
+      profile:
+        title: Заголовок
+        body_preview: Краткое содержание
+        body: Новость
+        count_views: число просмотров
+        
