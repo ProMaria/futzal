@@ -11,12 +11,41 @@
               
                 .text-center= image_tag item.image.url(:small) if item.image.present?
               .col-md-9
-                .pull-left=item.body
+                .pull-left=item.body_preview
   %li.list-group-item 
     %h2 Результаты прошедшего тура
+    -if @results.present?
+      %ul.list-group
+        %table.table.table-bordered
+          %tr
+            %td Дата и время
+            %td Хозяин 
+            %td Гость
+            %td Счет
+          -@results.each do |result|
+            %tr
+              %td=result.timestamp
+              %td=result.home_team.name
+              %td=result.guest_team.name
+              %td=result.result
+            
   %li.list-group-item 
     %h2 Расписание следующего тура
-
+    -if @schedule.present?
+      %ul.list-group
+        %table.table.table-bordered
+          %tr
+            %td Дата и время
+            %td Хозяин 
+            %td Гость
+           
+          -@schedule.each do |schedule|
+            %tr
+              %td=schedule.timestamp
+              %td=schedule.home_team.name
+              %td=schedule.guest_team.name
+              
+ 
 
 
 
