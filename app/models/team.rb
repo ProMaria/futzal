@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
     belongs_to :league
-    has_many :schedules
+    has_many :teams
+    
     has_many :home_teams, :class_name => "Team", :foreign_key => "home_team_id"
     has_many :guest_teams, :class_name => "Team", :foreign_key => "guest_team_id"
     

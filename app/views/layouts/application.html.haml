@@ -13,12 +13,13 @@
     
         #label_bar
           .row
-            .col-md-6
+            .col-md-8
               .pull-left
                 %a{:href => "/", title: 'На главную'}
                   =image_tag("brand.png", size: "75")
                 Комитет по футзалу Карагандинской областной ассоциации футбола
-            .col-md-6
+            
+            .col-md-4
               .well.pull-right
             
           
@@ -33,7 +34,7 @@
                 
                 %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
                   =image_tag("koaf.png", size: "55")
-           
+                
         #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
           .container-fluid
             .navbar-header
@@ -74,7 +75,27 @@
                   =link_to root_path do                    
                     %i.fa.fa-phone
                     Контакты
-                
+             
+              %ul.nav.navbar-nav.navbar-right              
+                -if user_signed_in? 
+                  
+                  %li
+                    =link_to destroy_user_session_path, :method => :delete, title:'Выйти' do
+                      %i.fa.fa-sign-out
+                  -if current_user.active_admin
+                    %li  
+                      =link_to new_user_registration_path, title: 'панель администратора' do
+                        %i.fa.fa-user-o
+                -else
+                  %li    
+                    =link_to new_user_session_path do
+                      %i.fa.fa-sign-in
+                  %li
+                    =link_to new_user_registration_path do
+                      %i.fa.fa-registered
+           
+                  
+            
             
            
                 

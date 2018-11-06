@@ -13,6 +13,26 @@ module Futzal
     I18n.enforce_available_locales = false
     I18n.config.available_locales = :ru
     config.i18n.default_locale = :ru
+    config.assets.initialize_on_precompile = false
+    
+    
+    
+     config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+ 
+  
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mail.ru",
+      port: 465,
+      domain: "mail.ru",
+      authentication: :login,
+      tls: true,
+      user_name: "slonik_85@inbox.ru",
+      password: "j7xb689f!",
+      enable_starttls_auto: true
+  }
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

@@ -37,7 +37,7 @@
             %tr
               %td=l result.timestamp, format: :short
               %td=result.home_team.name
-              %td=result.guest_team.name
+              %td=result.guest_team.name if result.guest_team.present?
               %td=result.result
 .panel.panel-success
   .panel-heading

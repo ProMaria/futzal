@@ -13,6 +13,7 @@ ru:
       referee: Судьи
       team: Команды
       schedule: Расписания игр
+      user: Пользователь
     attributes:
       item:
         title: Заголовок
@@ -45,6 +46,11 @@ ru:
         home_team: команда-хозяйка
         guest_team: команда-гость
         created_at: дата и время создания записи
+      user:
+        email: адрес электронной почты
+        password: пароль
+        password_confirmation: подтверждение пароля
+        remember_me: запомнить
         
   date:
     abbr_day_names:
