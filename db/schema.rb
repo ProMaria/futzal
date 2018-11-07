@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_093308) do
+ActiveRecord::Schema.define(version: 2018_11_07_145457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ampluas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.text "body"
@@ -62,6 +68,15 @@ ActiveRecord::Schema.define(version: 2018_11_07_093308) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "fi"
+    t.bigint "amplua_id"
+    t.string "year"
+    t.bigint "team_id"
+    t.index ["amplua_id"], name: "index_players_on_amplua_id"
+    t.index ["team_id"], name: "index_players_on_team_id"
   end
 
   create_table "referees", force: :cascade do |t|

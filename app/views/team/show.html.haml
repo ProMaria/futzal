@@ -1,0 +1,21 @@
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        .row
+          .col-md-10
+            Команда #{@team.name}. #{@team.league.name}
+          .col-md-2
+            .pull-right
+              =link_to team_index_path(league_id: @team.league_id), title:'назад' do
+                %i.fa.fa-arrow-left
+  .panel-body 
+    -if @players.present?
+      -@players.each_with_index  do |p,i|
+        %p
+          #{i+1}. #{p.fi}
+          -if p.year.present?
+            (#{p.year})
+          , #{p.amplua.name}
+    -else
+      состав не указан

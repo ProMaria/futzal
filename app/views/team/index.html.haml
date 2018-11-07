@@ -1,0 +1,11 @@
+-league_name = League.find(params[:league_id]).name
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Команды. #{league_name}.
+  .panel-body 
+    -@teams.each_with_index do |t,i|
+      %p
+        #{i+1}.  #{link_to t.name, team_path(t.id)}
+

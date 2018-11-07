@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fi: MyString
+  amplua_id: 1
+  year: MyString
+  team_id: 1
+
+two:
+  fi: MyString
+  amplua_id: 1
+  year: MyString
+  team_id: 1

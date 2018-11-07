@@ -59,12 +59,20 @@
                   =link_to referee_path do                    
                     %i.fa.fa-id-card
                     Судьи
-                %li
-                  =link_to root_path do                    
-                    %i.fa.fa-id-card
-                    Команды
                 -if League.count>0&&Team.count>0        
-                  %li.dropdown{class: params[:id].present? && request.path==table_path(params[:id]) ? 'active':''}
+                  %li.dropdown{class: request.path.match('team') ? 'active':''}
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+   
+                      %i.fa.fa-id-card
+                      Команды
+                      %span.caret
+                    %ul.dropdown-menu
+                      -League.all.each do |l|          
+                        %li
+                          %a{:href => team_index_path(league_id: l.id)}=l.name
+                   
+                -if League.count>0&&Team.count>0        
+                  %li.dropdown{class: request.path.match('table') ? 'active':''}
                     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                       %i.fa.fa-table
                       Таблицы

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/items" => "home#item"
   get "/referee" => "home#referee"  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #mount RailsAdmin::Engine => '/fadmin', as: 'rails_admin'
-  resources :items, only: [:index, :show]
+  resources :team, only: [:index, :show]
   resources :table, only: :show
   
 end

@@ -97,6 +97,10 @@ RailsAdmin.config do |config|
         field :name
     
   end
+  config.model Amplua do
+        field :name
+    
+  end
   config.model Contact do
         field :body
     
