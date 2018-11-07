@@ -7,6 +7,7 @@
         Таблицы игр и бомбардиры. #{league_name}.
   .panel-body 
     %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+    =link_to 'Сформировать положение', generate_table_result_index_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
     %table.table.table-hover
       %tr.active
         %td.text-center место
@@ -21,19 +22,20 @@
         %td.text-center О
 
 
-      -@teams.each_with_index do |team, index|
+      -@table_results.each do |team|
         %tr
-         
-          %td.text-center=index+1
-          %td.text-center=team.name
-          %td.text-center=Schedule.where('result !=? and (home_team_id=? or guest_team_id=?)', '', team.id, team.id).count
-          %td.text-center 0
-          %td.text-center 0 
-          %td.text-center 0
-          %td.text-center 0
-          %td.text-center 0
-          %td.text-center 0
-          %td.text-center 0
+          
+          %td.text-center=team.place
+          %td.text-center=team.team.name          
+          %td.text-center=team.count_game
+          %td.text-center=team.count_win 
+          %td.text-center=team.count_pat
+          %td.text-center=team.count_lost
+          %td.text-center=team.count_ball_create
+          %td.text-center=team.count_ball_lost
+          %td.text-center=team.sub_ball
+          %td.text-center=team.score
+    
     %h3 #{league_name}. Результаты матчей на #{Time.now.strftime('%d.%m.%Y')}.
     %table.table.table-hover.table-bordered
       %tr

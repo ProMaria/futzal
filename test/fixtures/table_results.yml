@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league_id: 1
+  team_id: 1
+  count_game: 1
+  count_win: 1
+  count_pat: 1
+  count_lost: 1
+  count_ball_create: 1
+  count_ball_lost: 1
+  place: 1
+
+two:
+  league_id: 1
+  team_id: 1
+  count_game: 1
+  count_win: 1
+  count_pat: 1
+  count_lost: 1
+  count_ball_create: 1
+  count_ball_lost: 1
+  place: 1

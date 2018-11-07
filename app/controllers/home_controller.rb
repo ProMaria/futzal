@@ -16,4 +16,10 @@ class HomeController < ApplicationController
       @items = Item.order(:created_at)      
   end
   
+  def table_result
+      if current_user.present? && current_user.active_admin
+          @table_result = TableResult.where(league_id: League.first.id).order(:place)
+      end
+  end
+  
 end

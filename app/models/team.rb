@@ -3,7 +3,7 @@ class Team < ApplicationRecord
     has_many :teams
     has_many :goal_leaders
     has_many :players
-    
+    has_many :table_result
     has_many :home_teams, :class_name => "Team", :foreign_key => "home_team_id"
     has_many :guest_teams, :class_name => "Team", :foreign_key => "guest_team_id"
     
@@ -20,6 +20,33 @@ class Team < ApplicationRecord
     validates_attachment :image,
                      content_type: { content_type: /\Aimage\/.*\z/ },
                      size: { less_than: 1.megabyte }
+    
+    def count_games
+        at_home_schedule = Schedule.finished.where(home_team_id: self.id)
+        at_guest_schedule = Schedule.finished.where(guest_team_id: self.id)
+        counter_all=counter_win = counter_lost=counter_pat = counter_ball_create=counter_ball_lost= 0
+				counter_all=at_home_schedule.count+at_guest_schedule.count				
+        at_home_schedule.each do |s|					
+					home_goal = s.result.split(':')[0]
+					guest_goal = s.result.split(':')[1]
+					counter_ball_create = counter_ball_create+home_goal.to_i
+					counter_ball_lost = counter_ball_lost+guest_goal.to_i
+					home_goal.to_i>guest_goal.to_i ? counter_win+=1 : home_goal.to_i<guest_goal.to_i ? counter_lost+=1 : counter_pat+=1
+				end
+				
+				at_guest_schedule.each do |s|					
+					home_goal = s.result.split(':')[0]
+					guest_goal = s.result.split(':')[1]
+					counter_ball_create = counter_ball_create+guest_goal.to_i
+					counter_ball_lost = counter_ball_lost+home_goal.to_i
+					
+					home_goal.to_i<guest_goal.to_i ? counter_win+=1 : home_goal.to_i>guest_goal.to_i ? counter_lost+=1 : counter_pat+=1
+				end
+				return counter_all, counter_win, counter_pat, counter_lost,counter_ball_create,counter_ball_lost
+				
+    end
+		
+		
 
    
 end

@@ -3,5 +3,7 @@ class Schedule < ApplicationRecord
 
     belongs_to :guest_team, :class_name => "Team", :foreign_key => "guest_team_id"
     belongs_to :tour
+    
+    scope :finished, ->{where("result!=''")}
    
 end

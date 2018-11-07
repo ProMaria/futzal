@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_145457) do
+ActiveRecord::Schema.define(version: 2018_11_07_164232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,22 @@ ActiveRecord::Schema.define(version: 2018_11_07_145457) do
     t.datetime "updated_at", null: false
     t.text "summary"
     t.integer "tour_id"
+  end
+
+  create_table "table_results", force: :cascade do |t|
+    t.bigint "league_id"
+    t.bigint "team_id"
+    t.integer "count_game"
+    t.integer "count_win"
+    t.integer "count_pat"
+    t.integer "count_lost"
+    t.integer "count_ball_create"
+    t.integer "count_ball_lost"
+    t.integer "sub_ball"
+    t.integer "score"
+    t.integer "place"
+    t.index ["league_id"], name: "index_table_results_on_league_id"
+    t.index ["team_id"], name: "index_table_results_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|

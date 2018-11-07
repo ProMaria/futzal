@@ -77,6 +77,14 @@ RailsAdmin.config do |config|
         field :name
     
   end
+  
+  config.model TableResult do
+        field :league
+        field :team
+        field :place
+    
+  end
+ 
  
   config.model User do
       create do

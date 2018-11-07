@@ -11,5 +11,10 @@ Rails.application.routes.draw do
   #mount RailsAdmin::Engine => '/fadmin', as: 'rails_admin'
   resources :team, only: [:index, :show]
   resources :table, only: :show
+  resources :table_result do
+    collection do
+      get 'generate'
+    end
+  end
   
 end
