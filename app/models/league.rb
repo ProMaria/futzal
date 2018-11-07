@@ -1,5 +1,5 @@
 class League < ApplicationRecord
-    has_many :teams
-    has_many :goal_leaders
-    has_many :table_result
+    has_many :teams, dependent: :destroy
+    
+    has_many :table_result, dependent: :destroy
 end

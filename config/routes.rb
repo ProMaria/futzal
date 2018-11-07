@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+
   mount RailsAdmin::Engine => '/fadmin', as: 'rails_admin'
   devise_for :users
   get "/" => "home#index", :as => "root"
@@ -12,6 +13,10 @@ Rails.application.routes.draw do
   resources :team, only: [:index, :show]
   resources :table, only: :show
   get "/table_result/generate"=>"table_result#generate"
-  
+  resources :doc do
+    member do 
+        get 'download'
+    end
+  end
   
 end

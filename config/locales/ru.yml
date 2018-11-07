@@ -19,6 +19,7 @@ ru:
       contact: контакт
       amplua: амплуа
       player: игрок
+      table_result: положение команд
       
     attributes:
       item:
@@ -75,6 +76,10 @@ ru:
         fi: фамилия и имя
         year: год рождения
         amplua: амплуа
+      table_result:
+        league: лига
+        team: команда
+        place: место
         
   date:
     abbr_day_names:

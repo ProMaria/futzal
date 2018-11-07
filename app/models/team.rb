@@ -1,9 +1,9 @@
 class Team < ApplicationRecord
     belongs_to :league
     has_many :teams
-    has_many :goal_leaders
-    has_many :players
-    has_many :table_result
+    has_many :goal_leaders, dependent: :destroy
+    has_many :players, dependent: :destroy
+    has_many :table_result, dependent: :destroy
     has_many :home_teams, :class_name => "Team", :foreign_key => "home_team_id"
     has_many :guest_teams, :class_name => "Team", :foreign_key => "guest_team_id"
     

@@ -51,8 +51,8 @@
                   =link_to root_path do                    
                     %i.fa.fa-home
                     Главная
-                %li
-                  =link_to '#' do
+                %li{class: request.path.match('doc') ? 'active':''}
+                  =link_to doc_index_path do
                     %i.fa.fa-book
                     Документы
                 %li{class: request.path==referee_path ? 'active':''}

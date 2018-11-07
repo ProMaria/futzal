@@ -1,0 +1,16 @@
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Документы
+  .panel-body
+    = form_for @document, url: doc_index_path, method: :post do |f|
+      .field
+        = f.file_field :file
+      .actions
+        = f.submit
+
+    -@documents.each_with_index do |d,i|
+      =i+1
+      =link_to d.filename, download_doc_path(d.id), title: 'скачать'
+      

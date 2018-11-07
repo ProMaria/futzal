@@ -51,12 +51,19 @@
           %td.text-center=index+1
           %td.text-center=team.name
           -i =1
-          -@teams.count.times do 
-            -if index+1==i
-              %td.text-center X
+          -@teams.each  do |t| 
+            -if team.id==t.id
+              %td.text-center{style: 'background-color: rgba(59, 227, 59, 1);'} 
             -else
+              -home=Schedule.where(home_team_id: team.id, guest_team_id: t.id)
+              -guest=Schedule.where(guest_team_id: team.id, home_team_id: t.id)
               %td.text-center
-                1:1/2:2
+                -h=home.first.present? ? home.first.result : ""
+                -g=guest.first.present? ? guest.first.result : ""
+                #{h}
+                -if h.present? || g.present?  
+                  %hr
+                #{g}
             -i+=1
     %h3 #{league_name}. Бомбардиры на #{Time.now.strftime('%d.%m.%Y')}.
     %table.table.table-hover
