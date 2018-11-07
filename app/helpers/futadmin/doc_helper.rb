@@ -1,0 +1,2 @@
+module Futadmin::DocHelper
+end

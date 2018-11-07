@@ -3,5 +3,17 @@ class HomeController < ApplicationController
       @items =Item.last(3)
       @results = Schedule.where("result !=''").last(10)
       @schedule = Schedule.where("result =''").last(10)
+      @league = League.all
   end
+  def contact
+      @text = Contact.all
+  end
+
+  def referee
+      @text = Referee.all
+  end
+  def item
+      @items = Item.order(:created_at)      
+  end
+  
 end

@@ -47,7 +47,7 @@
                 %span.icon-bar
             .collapse.navbar-collapse.navbar-menubuilder
               %ul.nav.navbar-nav.navbar-left
-                %li
+                %li{class: request.path==root_path ? 'active':''}
                   =link_to root_path do                    
                     %i.fa.fa-home
                     Главная
@@ -55,24 +55,32 @@
                   =link_to '#' do
                     %i.fa.fa-book
                     Документы
-                %li
-                  =link_to root_path do                    
+                %li{class: request.path==referee_path ? 'active':''}
+                  =link_to referee_path do                    
                     %i.fa.fa-id-card
                     Судьи
-                %li.active
+                %li
                   =link_to root_path do                    
                     %i.fa.fa-id-card
                     Команды
-                %li
-                  =link_to root_path do                    
-                    %i.fa.fa-table
-                    Таблицы
-                %li
-                  =link_to root_path do                    
+                -if League.count>0&&Team.count>0        
+                  %li.dropdown{class: params[:id].present? && request.path==table_path(params[:id]) ? 'active':''}
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      %i.fa.fa-table
+                      Таблицы
+                      %span.caret
+                    %ul.dropdown-menu
+                      -League.all.each do |l|          
+                        %li
+                          %a{:href => table_path(l.id)}=l.name
+                   
+                
+                %li{class: request.path==items_path ? 'active':''}
+                  =link_to items_path do                    
                     %i.fa.fa-file
                     Новости
-                %li
-                  =link_to root_path do                    
+                %li{class: request.path==contacts_path ? 'active':''}
+                  =link_to contacts_path do                    
                     %i.fa.fa-phone
                     Контакты
              
@@ -84,15 +92,13 @@
                       %i.fa.fa-sign-out
                   -if current_user.active_admin
                     %li  
-                      =link_to new_user_registration_path, title: 'панель администратора' do
+                      =link_to rails_admin_path, title: 'панель администратора' do
                         %i.fa.fa-user-o
                 -else
                   %li    
                     =link_to new_user_session_path do
                       %i.fa.fa-sign-in
-                  %li
-                    =link_to new_user_registration_path do
-                      %i.fa.fa-registered
+
            
                   
             

@@ -1,0 +1,21 @@
+.panel.panel-success
+  .panel-heading
+    Новости
+  .panel-body
+    -if @items.present?
+      %ul.list-group
+        -@items.each do |item|
+          %li.list-group-item
+            
+            .row
+              .col-md-3
+              
+                .text-center= image_tag item.image.url(:small) if item.image.present?
+              .col-md-9
+               
+                  
+                %h3.text-center=link_to item.title, items_path(item), target: :blank
+                %p=item.body
+    
+                  
+ 

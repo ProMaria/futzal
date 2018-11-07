@@ -12,8 +12,11 @@ ru:
       league: Лиги
       referee: Судьи
       team: Команды
-      schedule: Расписания игр
+      schedule: Расписание игр
       user: Пользователь
+      tour: туры
+      goal_leader: бомбардиры
+      contact: контакты
     attributes:
       item:
         title: Заголовок
@@ -46,11 +49,22 @@ ru:
         home_team: команда-хозяйка
         guest_team: команда-гость
         created_at: дата и время создания записи
+        summary: информация по встрече
+        tour: тур
       user:
         email: адрес электронной почты
         password: пароль
         password_confirmation: подтверждение пароля
         remember_me: запомнить
+        active_admin: является администратором
+      tour:
+        name: название тура
+      goal_leader:
+        fio: ФИО
+        team: команда
+        goal: голы
+      contact:
+        body: контактная информация
         
   date:
     abbr_day_names:

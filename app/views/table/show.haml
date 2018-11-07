@@ -1,0 +1,72 @@
+
+-league_name = League.find(params[:id]).name
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Таблицы игр и бомбардиры. #{league_name}.
+  .panel-body 
+    %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+    %table.table.table-hover
+      %tr.active
+        %td.text-center место
+        %td.text-center команда
+        %td.text-center И
+        %td.text-center В
+        %td.text-center Н
+        %td.text-center П
+        %td.text-center з/м
+        %td.text-center п/м
+        %td.text-center р/м
+        %td.text-center О
+
+
+      -@teams.each_with_index do |team, index|
+        %tr
+         
+          %td.text-center=index+1
+          %td.text-center=team.name
+          %td.text-center=Schedule.where('result !=? and (home_team_id=? or guest_team_id=?)', '', team.id, team.id).count
+          %td.text-center 0
+          %td.text-center 0 
+          %td.text-center 0
+          %td.text-center 0
+          %td.text-center 0
+          %td.text-center 0
+          %td.text-center 0
+    %h3 #{league_name}. Результаты матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    %table.table.table-hover.table-bordered
+      %tr
+        %td
+        %td        
+        -i=1
+        -@teams.count.times do 
+          %td.text-center=i
+          -i+=1
+      -@teams.each_with_index do |team, index|
+        %tr
+          %td.text-center=index+1
+          %td.text-center=team.name
+          -i =1
+          -@teams.count.times do 
+            -if index+1==i
+              %td.text-center X
+            -else
+              %td.text-center
+                1:1/2:2
+            -i+=1
+    %h3 #{league_name}. Бомбардиры на #{Time.now.strftime('%d.%m.%Y')}.
+    %table.table.table-hover
+      %tr.active
+        %td
+        %td.text-center игрок
+        %td.text-center команда
+        %td.text-center голы
+       
+      -@leaders.each_with_index do |leader, index|
+        %tr
+         
+          %td.text-center=index+1
+          %td.text-center=leader.fio
+          %td.text-center=leader.team.name
+          %td.text-center=leader.goal

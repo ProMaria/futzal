@@ -1,0 +1,2 @@
+module Futadmin::MainHelper
+end

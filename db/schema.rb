@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_192942) do
+ActiveRecord::Schema.define(version: 2018_11_07_093308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "docs", force: :cascade do |t|
     t.string "filename"
@@ -30,6 +36,13 @@ ActiveRecord::Schema.define(version: 2018_11_06_192942) do
     t.string "mime_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "goal_leaders", force: :cascade do |t|
+    t.bigint "team_id"
+    t.string "fio"
+    t.integer "goal"
+    t.index ["team_id"], name: "index_goal_leaders_on_team_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -71,6 +84,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_192942) do
     t.integer "guest_team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "summary"
+    t.integer "tour_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -83,6 +98,12 @@ ActiveRecord::Schema.define(version: 2018_11_06_192942) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_teams_on_league_id"
+  end
+
+  create_table "tours", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
