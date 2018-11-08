@@ -37,12 +37,12 @@ RailsAdmin.config do |config|
     end
     export
     bulk_delete do
-        except ['Team']
+       # except ['Team']
     end
     show
     edit
     delete do
-        except ['Team']
+        #except ['Team']
     end
         
     show_in_app

@@ -8,7 +8,7 @@
   .panel-body 
     %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
     -if current_user.present? && current_user.active_admin  
-      =link_to 'Сформировать положение', table_result_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
+      =link_to 'Сформировать положение', futadmin_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
     %table.table.table-hover
       %tr.active
         %td.text-center место
@@ -59,7 +59,8 @@
               -guest=Schedule.where(guest_team_id: team.id, home_team_id: t.id)
               %td.text-center
                 -h=home.first.present? ? home.first.result : ""
-                -g=guest.first.present? ? guest.first.result : ""
+                -g=guest.first.present? && guest.first.result.present? ? guest.first.result.split(':')[1]+':'+guest.first.result.split(':')[0] : ""
+                
                 #{h}
                 -if h.present? || g.present?  
                   %hr
