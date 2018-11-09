@@ -1,5 +1,6 @@
 class DocController < ApplicationController
-  def index
+  before_action :check_admin, only: [:create, :destroy]
+    def index
       @documents = Doc.order(:created_at)
       @document=Doc.new
   end
@@ -9,16 +10,29 @@ class DocController < ApplicationController
       send_data(@document.file_contents,
             type: @document.content_type,
             filename: @document.filename)
+      redirect_to doc_index_path
   end
 
   def create
-      Doc.create(document_params)
+        doc = Doc.new
+        doc.uploaded_file=params[:attachment]
+      if doc.save
+          redirect_to doc_index_path
+      else
+          render 'index'
+      end
+          
   end
 
-  def delete
+  def destroy
+      Doc.find(params[:id]).destroy
+      redirect_to doc_index_path
   end
   private 
   def document_params
    params.require(:doc).permit(:file)
+  end
+  def check_admin
+     redirect_to doc_index_path unless current_user.present? && current_user.active_admin
   end
 end

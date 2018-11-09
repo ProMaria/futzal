@@ -4,13 +4,16 @@
       .col-md-12
         Документы
   .panel-body
-    = form_for @document, url: doc_index_path, method: :post do |f|
-      .field
-        = f.file_field :file
-      .actions
-        = f.submit
+    -if current_user.present? && current_user.active_admin 
+      = form_tag doc_index_path, method: :post, multipart: true do
+        =file_field_tag :attachment
+        = submit_tag 'загрузить'
 
     -@documents.each_with_index do |d,i|
-      =i+1
-      =link_to d.filename, download_doc_path(d.id), title: 'скачать'
-      
+      %p
+        #{i+1}.
+        
+        =link_to d.filename, download_doc_path(d.id), target: :blank, title: 'скачать'
+        -if current_user.present? && current_user.active_admin
+          =link_to doc_path(d), method: :delete, data: {confirm:'Удалить документ?'}, title: 'удаление' do
+            %i.fa.fa-trash

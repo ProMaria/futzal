@@ -13,7 +13,7 @@ class FutadminController < ApplicationController
             result.update_attribute(:place, place)
             place+=1
         end
-        redirect_to table_path(params[:league_id])
+        redirect_to team_position_table_path(params[:league_id])
     end
    
     private
