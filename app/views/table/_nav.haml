@@ -1,0 +1,9 @@
+%ul.nav.nav-tabs
+  %li{class: request.path==team_position_table_path(params[:id]) ? 'active': ''}
+    =link_to 'положение команд',team_position_table_path(params[:id])
+  %li{class: request.path==match_result_table_path(params[:id]) ? 'active': ''}
+    =link_to 'результаты матчей',match_result_table_path(params[:id])
+  %li{class: request.path==goal_leader_table_path(params[:id]) ? 'active': ''}
+    =link_to 'бомбардиры',goal_leader_table_path(params[:id])
+  %li{class: request.path==summary_table_path(params[:id]) ? 'active': ''}
+    =link_to 'обзор матчей',summary_table_path(params[:id])

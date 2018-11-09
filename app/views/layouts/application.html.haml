@@ -60,7 +60,7 @@
                     %i.fa.fa-id-card
                     Судьи
                 -if League.count>0&&Team.count>0        
-                  %li.dropdown{class: request.path.match('team') ? 'active':''}
+                  %li.dropdown{class: request.path.match('team_index') ? 'active':''}
                     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
    
                       %i.fa.fa-id-card
@@ -80,7 +80,7 @@
                     %ul.dropdown-menu
                       -League.all.each do |l|          
                         %li
-                          %a{:href => table_path(l.id)}=l.name
+                          %a{:href => team_position_table_path(l.id)}=l.name
                    
                 
                 %li{class: request.path==items_path ? 'active':''}

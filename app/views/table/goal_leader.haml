@@ -1,0 +1,23 @@
+
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Таблицы игр и бомбардиры. #{@league_name}.
+  .panel-body 
+    %h3 #{@league_name}. Бомбардиры на #{Time.now.strftime('%d.%m.%Y')}.
+    =render 'nav'
+    %table.table.table-hover
+      %tr.active
+        %td
+        %td.text-center игрок
+        %td.text-center команда
+        %td.text-center голы
+       
+      -@leaders.each_with_index do |leader, index|
+        %tr
+         
+          %td.text-center=index+1
+          %td.text-center=leader.fio
+          %td.text-center=leader.team.name
+          %td.text-center=leader.goal

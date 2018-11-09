@@ -1,0 +1,28 @@
+
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Таблицы игр и бомбардиры. #{@league_name}.
+  .panel-body 
+    %h3 #{@league_name}. Обзор матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    =render 'nav'
+    %table.table.table-hover
+      %tr.active
+        
+        %td.text-center.info дата
+        %td.text-center команда-хозяйка
+        %td.text-center команда-гость
+        %td.text-center.info счет
+        %td статистика
+       
+      -@summary.each_with_index do |s, index|
+        %tr
+         
+          %td.text-center.info=l s.timestamp, format: :short
+          %td.text-center=s.home_team.name
+          %td.text-center=s.guest_team.name
+          %td.text-center.info=s.result
+
+          %td.text-center=s.summary
+     

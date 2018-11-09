@@ -1,0 +1,36 @@
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Таблицы игр, бомбардиры, статистика. #{@league_name}.
+  .panel-body 
+    =render 'nav'
+    %h3 #{@league_name}. Результаты матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    %table.table.table-hover.table-bordered
+      %tr
+        %td
+        %td        
+        -i=1
+        -@teams.count.times do 
+          %td.text-center=i
+          -i+=1
+      -@teams.each_with_index do |team, index|
+        %tr
+          %td.text-center=index+1
+          %td.text-center=team.name
+          -i =1
+          -@teams.each  do |t| 
+            -if team.id==t.id
+              %td.text-center{style: 'background-color: rgba(59, 227, 59, 1);'} 
+            -else
+              -home=Schedule.where(home_team_id: team.id, guest_team_id: t.id)
+              -guest=Schedule.where(guest_team_id: team.id, home_team_id: t.id)
+              %td.text-center
+                -h=home.first.present? ? home.first.result : ""
+                -g=guest.first.present? && guest.first.result.present? ? guest.first.result.split(':')[1]+':'+guest.first.result.split(':')[0] : ""
+                
+                #{h}
+                -if h.present? || g.present?  
+                  %hr
+                #{g}
+            -i+=1

@@ -5,6 +5,6 @@ class Schedule < ApplicationRecord
     
     belongs_to :tour
     
-    scope :finished, ->{where("result!=''")}
+    scope :finished, ->{where("result!=''").order(timestamp: :desc)}
    
 end

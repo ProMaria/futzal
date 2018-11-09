@@ -1,0 +1,38 @@
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-12
+        Таблицы игр, бомбардиры, статистика. #{@league_name}.
+  .panel-body 
+    %h3 #{@league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+    =render 'nav'
+    -if current_user.present? && current_user.active_admin  
+      =link_to 'Сформировать положение', futadmin_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
+    %table.table.table-hover
+      %tr.active
+        %td.text-center место
+        %td.text-center команда
+        %td.text-center И
+        %td.text-center В
+        %td.text-center Н
+        %td.text-center П
+        %td.text-center з/м
+        %td.text-center п/м
+        %td.text-center р/м
+        %td.text-center О
+
+
+      -@table_results.each do |team|
+        %tr
+          
+          %td.text-center=team.place
+          %td.text-center=team.team.name          
+          %td.text-center=team.count_game
+          %td.text-center=team.count_win 
+          %td.text-center=team.count_pat
+          %td.text-center=team.count_lost
+          %td.text-center=team.count_ball_create
+          %td.text-center=team.count_ball_lost
+          %td.text-center=team.sub_ball
+          %td.text-center=team.score
+    
