@@ -11,12 +11,12 @@ require 'mina/git'
 
 set :application_name, 'koaf-futzal'
 set :domain, 'koaf-futzal.ru'
-set :deploy_to, '/var/www/foobar.com'
+set :deploy_to, '/home/masha/www/'
 set :repository, 'https://github.com/ProMaria/futzal.git'
 set :branch, 'master'
 
 # Optional settings:
-#   set :user, 'foobar'          # Username in the server to SSH to.
+   set :user, 'masha'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
 
