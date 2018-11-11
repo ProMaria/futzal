@@ -117,9 +117,29 @@
         .row
           .col-md-10.col-md-offset-1
             = yield
+      #scroller
+    
       .footer
+        .row
+          .col-md-12
+            .text-center
+              =image_tag("uefa.png", size: "55", title: 'Наш спонсор')  
         .row
           .col-md-12
             .text-center
               \&#xA9; 2018 Все права защищены. Копирование допускается с указанием на первоисточник.
 
+:javascript
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 0) {
+            $('#scroller').fadeIn();
+        } else {
+            $('#scroller').fadeOut();
+        }
+    });
+    $('#scroller').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
