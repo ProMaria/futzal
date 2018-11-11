@@ -19,7 +19,9 @@
                 %p.pull-right
                   %i.fa.fa-home
                   Просмотров: #{item.count_views}
-                  =link_to 'Читать', items_path, class: 'btn btn-info btn-sm' 
+                  =link_to 'Читать', items_path, class: 'btn btn-info btn-sm'
+    -else
+      .text-center Пока не создано ни одной новости
 
 .panel.panel-success
   .panel-heading
@@ -39,6 +41,8 @@
               %td=result.home_team.name
               %td=result.guest_team.name if result.guest_team.present?
               %td=result.result
+    -else
+      .text-center Результатов нет
 .panel.panel-success
   .panel-heading
     Расписание следующего тура
@@ -56,6 +60,8 @@
               %td=l schedule.timestamp, format: :short
               %td=schedule.home_team.name
               %td=schedule.guest_team.name
+    -else
+      .text-center Расписание на следующий тур пока не создано
 
               
               

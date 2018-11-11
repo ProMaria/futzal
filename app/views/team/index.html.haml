@@ -7,5 +7,10 @@
   .panel-body 
     -@teams.each_with_index do |t,i|
       %p
-        #{i+1}.  #{link_to t.name, team_path(t.id)}
+        #{i+1}.   #{link_to t.name, team_path(t.id)}
         
+        %p
+        =link_to  t.image.url(:original, false), target: :blank do
+          
+          #{image_tag t.image.url(:small) if t.image.present?}
+                

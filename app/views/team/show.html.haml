@@ -4,13 +4,22 @@
       .col-md-12
         .row
           .col-md-10
-            Команда #{@team.name}. #{@team.league.name}
+            Состав команды
           .col-md-2
             .pull-right
               =link_to team_index_path(league_id: @team.league_id), title:'назад' do
                 %i.fa.fa-arrow-left
   .panel-body 
+    %h3.text-center
+      #{@team.name}. #{@team.league.name}
+    %p.text-center 
+      =link_to  @team.image.url(:original, false), target: :blank do
+        #{image_tag @team.image.url(:big) if @team.image.present?}
+
+    
+    %br
     -if @players.present?
+      %h3.text-center Состав команды:
       -@players.each_with_index  do |p,i|
         %p
           #{i+1}. #{p.fi}
@@ -18,4 +27,4 @@
             (#{p.year})
           , #{p.amplua.name}
     -else
-      состав не указан
+      .text-center состав не указан

@@ -60,10 +60,10 @@
                     %i.fa.fa-id-card
                     Судьи
                 -if League.count>0&&Team.count>0        
-                  %li.dropdown{class: request.path.match('team_index') ? 'active':''}
+                  %li.dropdown{class: (request.path.match('team')&&!request.path.match('table')) ? 'active':''}
                     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
    
-                      %i.fa.fa-id-card
+                      %i.fa.fa-futbol-o
                       Команды
                       %span.caret
                     %ul.dropdown-menu
