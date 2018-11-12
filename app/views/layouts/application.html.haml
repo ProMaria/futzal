@@ -27,18 +27,12 @@
             .col-md-4
               .well.pull-right
             
+                =image_tag("sponsor1.png", size: "60", title: "Мини-футбольный клуб 'Тулпар'")  
+                =image_tag("sponsor3.png", height: "55",width:"110", title: "KAZ GLOBAL TREVEL")
+                =image_tag("sponsor2.png", size: "60", title: "Спорткомплекс 'Тулпар'")  
           
                 
-                
-                %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
-                  =image_tag("fifa.png", size: "55")
-
-                
-                %a{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
-                  =image_tag("uefa.png", size: "55")
-                
-                %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
-                  =image_tag("koaf.png", size: "55")
+               
                 
         #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
           .container-fluid
@@ -128,7 +122,16 @@
         .row
           .col-md-12
             .text-center
-              =image_tag("uefa.png", size: "55", title: 'Наш спонсор')  
+              %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
+                =image_tag("fifa.png", size: "55")
+
+                
+              %a{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
+                =image_tag("uefa.png", size: "55")
+                
+              %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
+                =image_tag("koaf.png", size: "55")
+
         .row
           .col-md-12
             .text-center
