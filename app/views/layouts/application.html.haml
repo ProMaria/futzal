@@ -33,10 +33,7 @@
                 =image_tag("sponsor1.png", size: "60", title: "Мини-футбольный клуб 'Тулпар'")  
                 =image_tag("sponsor3.png", height: "55",width:"110", title: "KAZ GLOBAL TREVEL")
                 =image_tag("sponsor2.png", size: "60", title: "Спорткомплекс 'Тулпар'")  
-          
-                
-               
-                
+
         #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
           .container-fluid
             .navbar-header
@@ -64,7 +61,6 @@
                 -if League.count>0&&Team.count>0        
                   %li.dropdown{class: (request.path.match('team')&&!request.path.match('table')) ? 'active':''}
                     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-   
                       %i.fa.fa-futbol-o
                       Команды
                       %span.caret
@@ -72,7 +68,7 @@
                       -League.all.each do |l|          
                         %li
                           %a{:href => team_index_path(league_id: l.id)}=l.name
-                   
+
                 -if League.count>0&&Team.count>0        
                   %li.dropdown{class: request.path.match('table') ? 'active':''}
                     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -83,7 +79,7 @@
                       -League.all.each do |l|          
                         %li
                           %a{:href => team_position_table_path(l.id)}=l.name
-                   
+
                 
                 %li{class: request.path==items_path ? 'active':''}
                   =link_to items_path do                    
@@ -93,7 +89,7 @@
                   =link_to contacts_path do                    
                     %i.fa.fa-phone
                     Контакты
-             
+
               %ul.nav.navbar-nav.navbar-right              
                 -if user_signed_in? 
                   
@@ -109,13 +105,7 @@
                     =link_to new_user_session_path do
                       %i.fa.fa-sign-in
 
-           
-                  
-            
-            
-           
-                
-            
+
         .row
           .col-md-10.col-md-offset-1
             = yield
@@ -128,10 +118,10 @@
               %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
                 =image_tag("fifa.png", size: "55")
 
-                
+
               %a{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
                 =image_tag("uefa.png", size: "55")
-                
+
               %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
                 =image_tag("koaf.png", size: "55")
 
@@ -154,3 +144,32 @@
         }, 400);
         return false;
     });
+
+  (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+          try {
+              w.yaCounter51124184 = new Ya.Metrika2({
+                  id:51124184,
+                  clickmap:true,
+                  trackLinks:true,
+                  accurateTrackBounce:true
+              });
+          } catch(e) { }
+      });
+
+      var n = d.getElementsByTagName("script")[0],
+          s = d.createElement("script"),
+          f = function () { n.parentNode.insertBefore(s, n); };
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+      if (w.opera == "[object Opera]") {
+          d.addEventListener("DOMContentLoaded", f, false);
+      } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+%noscript
+  %div
+    %img{:alt => "", :src => "https://mc.yandex.ru/watch/51124184", :style => "position:absolute; left:-9999px;"}/
+    / /Yandex.Metrika counter
+
