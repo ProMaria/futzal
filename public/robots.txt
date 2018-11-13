@@ -1,1 +1,5 @@
 # See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+User-agent: *
+Allow: /
+Host: www.koaf-futzal.ru
+Sitemap: http://koaf-futzal.ru/sitemap.xml

@@ -10,7 +10,7 @@
     %meta{name:"description", content:"сайт карагандинской областной ассоциации футбола, на котором размещена информация о проходящих встречах, выложено расписание игр и их итоги, размещена информация о командах, принимающих участвие в турнире"}
     %meta{name:"author", content: 'Proshakova Maria'}
     %meta{name:"copyright", content: 'Все права принадлежат комитету по футзалу Карагандинской областной ассоциации футбола'}
-
+    = favicon_link_tag 'favicon.ico' 
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -34,7 +34,7 @@
                 =image_tag("sponsor3.png", height: "55",width:"110", title: "KAZ GLOBAL TREVEL")
                 =image_tag("sponsor2.png", size: "60", title: "Спорткомплекс 'Тулпар'")  
 
-        #custom-bootstrap-menu.navbar.navbar-default{:role => "navigation"}
+        #custom-bootstrap-menu.navbar.navbar-default.my_menu{:role => "navigation"}
           .container-fluid
             .navbar-header
               %a.navbar-brand{:href => "#"} 
