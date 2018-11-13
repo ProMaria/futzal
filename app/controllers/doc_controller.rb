@@ -10,7 +10,7 @@ class DocController < ApplicationController
       send_data(@document.file_contents,
             type: @document.content_type,
             filename: @document.filename)
-      redirect_to doc_index_path
+      # redirect_to doc_index_path
   end
 
   def create

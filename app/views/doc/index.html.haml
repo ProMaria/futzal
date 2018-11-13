@@ -13,7 +13,7 @@
       %p
         #{i+1}.
         
-        =link_to d.filename, download_doc_path(d.id), target: :blank, title: 'скачать'
+        =link_to d.filename, download_doc_path(d.id), title: 'скачать'
         -if current_user.present? && current_user.active_admin
           =link_to doc_path(d), method: :delete, data: {confirm:'Удалить документ?'}, title: 'удаление' do
             %i.fa.fa-trash
