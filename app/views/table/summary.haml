@@ -15,14 +15,25 @@
         %td.text-center команда-гость
         %td.text-center.info счет
         %td статистика
-       
       -@summary.each_with_index do |s, index|
         %tr
-         
           %td.text-center.info=l s.timestamp, format: :short
           %td.text-center=s.home_team.name
           %td.text-center=s.guest_team.name
           %td.text-center.info=s.result
 
-          %td.text-center=s.summary
-     
+          %td
+            -Doc.where(schedule_id: s.id).each_with_index do |d,i|
+              %p
+                #{i+1}.
+
+                =link_to d.filename, download_doc_path(d.id), title: 'скачать'
+                -if current_user.present? && current_user.active_admin
+                  =link_to doc_path(d), method: :delete, data: {confirm:'Удалить документ?'}, title: 'удаление' do
+                    %i.fa.fa-trash
+            -if current_user.present? && current_user.active_admin
+              = form_tag doc_index_path, method: :post, multipart: true do
+                =file_field_tag :file, :multiple => true, name: "attachments[]"
+                =hidden_field_tag :schedule_id, s.id
+                =hidden_field_tag :league_id, params[:id]
+                = submit_tag 'загрузить'

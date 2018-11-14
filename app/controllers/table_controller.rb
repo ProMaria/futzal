@@ -12,7 +12,8 @@ class TableController < ApplicationController
     end
     
     def summary
-        @summary = Schedule.finished
+        teams = Team.where(league_id: params[:id]).pluck(:id)
+        @summary = Schedule.finished.where(guest_team_id: teams)
     end
    private
     def set_initial

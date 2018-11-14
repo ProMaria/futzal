@@ -7,4 +7,5 @@ class Schedule < ApplicationRecord
     
     scope :finished, ->{where("result!=''").order(timestamp: :desc)}
     default_scope {order(:timestamp)}
+
 end

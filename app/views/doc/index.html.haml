@@ -6,7 +6,7 @@
   .panel-body
     -if current_user.present? && current_user.active_admin 
       = form_tag doc_index_path, method: :post, multipart: true do
-        =file_field_tag :attachment
+        =file_field_tag :file, :multiple => true, name: "attachments[]"
         = submit_tag 'загрузить'
 
     -@documents.each_with_index do |d,i|

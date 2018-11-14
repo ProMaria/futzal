@@ -1,11 +1,15 @@
 class Doc < ApplicationRecord
-    def uploaded_file=(incoming_file)
-        self.filename = incoming_file.original_filename
-        self.content_type=incoming_file.content_type
-        self.file_contents=incoming_file.read
-        
+    def initialize(params = {})
+        file = params.delete(:file)
+        super
+        if file
+            self.filename = sanitize_filename(file.original_filename)
+            self.content_type = file.content_type
+            self.file_contents = file.read
+        end
     end
-    
+
+
     private
     def sanitize_filename(filename)
         return File.basename(filename)

@@ -1,8 +1,8 @@
 class DocController < ApplicationController
   before_action :check_admin, only: [:create, :destroy]
     def index
-      @documents = Doc.order(:created_at)
-      @document=Doc.new
+      @documents = Doc.order(:created_at).where('schedule_id is null')
+
   end
 
   def download
@@ -14,19 +14,43 @@ class DocController < ApplicationController
   end
 
   def create
-        doc = Doc.new
-        doc.uploaded_file=params[:attachment]
-      if doc.save
-          redirect_to doc_index_path
-      else
-          render 'index'
+    if params[:attachments].present?
+      params[:attachments].each do |file|
+        filename = File.basename(file.original_filename)
+        content_type = file.content_type
+        file_contents = file.read
+        Doc.create(filename: filename,
+                        content_type: content_type,
+                        file_contents: file_contents,
+                        schedule_id: params[:schedule_id].present? ? params[:schedule_id] :'' )
       end
-          
+      if params[:schedule_id].present?
+        redirect_to summary_table_path(params[:league_id])
+      else
+        redirect_to doc_index_path
+      end
+
+    else
+      redirect_to root_path,  notice: 'Файлы не выбраны'
+    end
   end
 
   def destroy
-      Doc.find(params[:id]).destroy
-      redirect_to doc_index_path
+      doc = Doc.find(params[:id])
+      schedule_id = doc.schedule_id
+      puts "SCHEDULE"
+      puts schedule_id
+      doc.destroy
+      if schedule_id.present?
+        league_id = Schedule.find(schedule_id).home_team.league_id
+        puts "LEAGUE"
+        puts league_id
+        redirect_to summary_table_path(league_id)
+      else
+        redirect_to doc_index_path
+      end
+
+
   end
   private 
   def document_params
