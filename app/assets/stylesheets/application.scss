@@ -152,9 +152,35 @@ body {
 
   width: 100%;
   z-index: 2;
+}
 
+.photo {
+  float: left; /* говорим элементам выстраиваться один за другим */
+  max-width: 33.333333%; /* устанавливаем ширину элемента */
+  padding: 10px; /* добавляем отступы с каждой стороны */
+  box-sizing: border-box; /* меняем способ вычисления ширины */
+}
+.photo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  padding: 10px;
+  background-color: #eee;
+  box-sizing: border-box;
+}
 
+.photo a:hover {
+  opacity: 0.5;
+}
+.photo a {
+  display: block;
+}
 
+.photo figcaption {
+  font-family: 'Open Sans', sans-serif;
+  color: #999999;
+  text-align: center;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 700px) {
@@ -174,5 +200,21 @@ body {
   .copyright{
     padding: 10px;
   }
+  .photo {
+    max-width: 90%; /* устанавливаем ширину элемента */
+  }
+  .photo figcaption {
+    margin-top: 16px;
+  }
+
 }
 
+@media only screen and (max-width: 900px) and (min-width: 701px) {
+  .photo {
+    max-width: 50%; /* устанавливаем ширину элемента */
+  }
+  .photo figcaption {
+    margin-top: 16px;
+  }
+
+}

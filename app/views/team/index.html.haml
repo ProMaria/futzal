@@ -1,16 +1,33 @@
+-#-league_name = League.find(params[:league_id]).name
+-#.panel.panel-success
+-#  .panel-heading
+-#    .row
+-#      .col-md-12
+-#        Команды. #{league_name}.
+-#  .panel-body
+-#    -@teams.each_with_index do |t,i|
+-#      %p
+-#        #{i+1}.   #{link_to t.name, team_path(t.id)}
+-#
+-#        %p
+-#        =link_to  t.image.url(:original, false), target: :blank do
+-#
+-#          #{image_tag t.image.url(:small) if t.image.present?}
+
 -league_name = League.find(params[:league_id]).name
 .panel.panel-success
   .panel-heading
     .row
       .col-md-12
         Команды. #{league_name}.
-  .panel-body 
-    -@teams.each_with_index do |t,i|
-      %p
-        #{i+1}.   #{link_to t.name, team_path(t.id)}
-        
-        %p
-        =link_to  t.image.url(:original, false), target: :blank do
-          
-          #{image_tag t.image.url(:small) if t.image.present?}
-                
+  .panel-body
+    -@teams.each do |t|
+      .photo
+        =link_to   team_path(t.id), target: :blank, title: 'Перейти на страницу команды' do
+          #{image_tag t.image.url(:big) if t.image.exists?}
+          =image_tag("no_foto.jpg") unless t.image.exists?
+          %figcaption=t.name
+
+
+
+
