@@ -134,7 +134,8 @@ body {
   display: none;
 
 
-  background: transparent url(arrow.png) no-repeat right top;
+  //background: transparent url(arrow.png) no-repeat right top;
+  background-image: image-url("arrow.png");
   height: 32px;
 
 }
