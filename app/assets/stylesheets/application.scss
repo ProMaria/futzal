@@ -139,6 +139,23 @@ body {
   height: 32px;
 
 }
+.navbar-brand{
+  background-image: image-url("brand.png") no-repeat;
+  width: 32px;
+  height: 32px;
+}
+.positionTop{
+  position: fixed;
+  top: 0%;
+  left: 0;
+  opacity:1;
+
+  width: 100%;
+  z-index: 2;
+
+
+
+}
 
 @media only screen and (max-width: 700px) {
   #label_bar {

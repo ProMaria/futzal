@@ -19,3 +19,23 @@
 //= require activestorage
 //= require turbolinks
 
+//$(document).ready(function(){
+//
+//    $(window).scroll(function () {
+//        if ($(this).scrollTop() > 0) {
+//
+//            $('#scroller').fadeIn();
+//            $('.my_menu').addClass('positionTop');
+//        } else {
+//            $('#scroller').fadeOut();
+//            $('.my_menu').removeClass('positionTop');}
+//    };
+//
+//    $('#scroller').click(function () {
+//        $('body,html').animate({
+//            scrollTop: 0
+//        }, 400);
+//        return false;
+//    });
+//
+//});
