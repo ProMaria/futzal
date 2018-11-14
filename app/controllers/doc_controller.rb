@@ -31,20 +31,16 @@ class DocController < ApplicationController
       end
 
     else
-      redirect_to root_path,  notice: 'Файлы не выбраны'
+      redirect_to doc_index_path,  notice: 'Файлы не выбраны'
     end
   end
 
   def destroy
       doc = Doc.find(params[:id])
       schedule_id = doc.schedule_id
-      puts "SCHEDULE"
-      puts schedule_id
       doc.destroy
       if schedule_id.present?
         league_id = Schedule.find(schedule_id).home_team.league_id
-        puts "LEAGUE"
-        puts league_id
         redirect_to summary_table_path(league_id)
       else
         redirect_to doc_index_path

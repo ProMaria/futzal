@@ -7,33 +7,37 @@
   .panel-body 
     %h3 #{@league_name}. Обзор матчей на #{Time.now.strftime('%d.%m.%Y')}.
     =render 'nav'
-    %table.table.table-hover
-      %tr.active
-        
-        %td.text-center.info дата
-        %td.text-center команда-хозяйка
-        %td.text-center команда-гость
-        %td.text-center.info счет
-        %td статистика
-      -@summary.each_with_index do |s, index|
-        %tr
-          %td.text-center.info=l s.timestamp, format: :short
-          %td.text-center=s.home_team.name
-          %td.text-center=s.guest_team.name
-          %td.text-center.info=s.result
+    -if @tours.present?
+      -@tours.each do |tour|
+        %h3.text-center.bg-success=tour.name
+        - summary = Schedule.finished.where(tour_id: tour.id).last(10)
+        %table.table.table-hover
+          %tr.active
 
-          %td
-            -Doc.where(schedule_id: s.id).each_with_index do |d,i|
-              %p
-                #{i+1}.
+            %td.text-center.info дата
+            %td.text-center команда-хозяйка
+            %td.text-center команда-гость
+            %td.text-center.info счет
+            %td статистика
+          -summary.each_with_index do |s, index|
+            %tr
+              %td.text-center.info=l s.timestamp, format: :short
+              %td.text-center=s.home_team.name
+              %td.text-center=s.guest_team.name
+              %td.text-center.info=s.result
 
-                =link_to d.filename, download_doc_path(d.id), title: 'скачать'
+              %td
+                -Doc.where(schedule_id: s.id).each_with_index do |d,i|
+                  %p
+                    #{i+1}.
+
+                    =link_to d.filename, download_doc_path(d.id), title: 'скачать'
+                    -if current_user.present? && current_user.active_admin
+                      =link_to doc_path(d), method: :delete, data: {confirm:'Удалить документ?'}, title: 'удаление' do
+                        %i.fa.fa-trash
                 -if current_user.present? && current_user.active_admin
-                  =link_to doc_path(d), method: :delete, data: {confirm:'Удалить документ?'}, title: 'удаление' do
-                    %i.fa.fa-trash
-            -if current_user.present? && current_user.active_admin
-              = form_tag doc_index_path, method: :post, multipart: true do
-                =file_field_tag :file, :multiple => true, name: "attachments[]"
-                =hidden_field_tag :schedule_id, s.id
-                =hidden_field_tag :league_id, params[:id]
-                = submit_tag 'загрузить'
+                  = form_tag doc_index_path, method: :post, multipart: true do
+                    =file_field_tag :file, :multiple => true, name: "attachments[]"
+                    =hidden_field_tag :schedule_id, s.id
+                    =hidden_field_tag :league_id, params[:id]
+                    = submit_tag 'загрузить'

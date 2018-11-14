@@ -1,8 +1,13 @@
 class HomeController < ApplicationController
   def index
       @items =Item.last(3)
-      @results = Schedule.where("result !=''").last(10)
-      @schedule = Schedule.where("result =''").last(10)
+
+      results = Schedule.finished.last(10)
+      @tours = Tour.where(id:results.pluck(:tour_id).uniq)
+
+      schedule = Schedule.start.last(10)
+      @tours_future = Tour.where(id:schedule.pluck(:tour_id).uniq)
+
       @league = League.all
   end
   def contact

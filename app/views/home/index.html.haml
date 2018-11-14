@@ -25,53 +25,51 @@
     -else
       .text-center Пока не создано ни одной новости
 
+
 .panel.panel-success
   .panel-heading
     Результаты прошедшего тура
   .panel-body
-    -if @results.present?
-      %ul.list-group
-        %table.table.table-hover
-          %tr.active
-            %td Дата и время
-            %td Хозяин 
-            %td Гость
-            %td Счет
-          -@results.each do |result|
-            %tr
-              %td=l result.timestamp, format: :short
-              %td=result.home_team.name
-              %td=result.guest_team.name if result.guest_team.present?
-              %td=result.result
+    -if @tours.present?
+      -@tours.each do |tour|
+        %h3.text-center=tour.name
+        - results = Schedule.finished.where(tour_id: tour.id).last(10)
+        -if results.present?
+          %ul.list-group
+            %table.table.table-hover
+              %tr.active
+                %td Дата и время
+                %td Хозяин
+                %td Гость
+                %td Счет
+              -results.each do |result|
+                %tr
+                  %td=l result.timestamp, format: :short
+                  %td=result.home_team.name
+                  %td=result.guest_team.name if result.guest_team.present?
+                  %td=result.result
     -else
       .text-center Результатов нет
+
 .panel.panel-success
   .panel-heading
     Расписание следующего тура
   .panel-body
-    -if @schedule.present?
-      %ul.list-group
-        %table.table.table-hover
-          %tr.active
-            %td Дата и время
-            %td Хозяин 
-            %td Гость
-           
-          -@schedule.each do |schedule|
-            %tr
-              %td=l schedule.timestamp, format: :short
-              %td=schedule.home_team.name
-              %td=schedule.guest_team.name
+    -if @tours_future.present?
+      -@tours_future.each do |tour|
+        %h3.text-center=tour.name
+        - results = Schedule.start.where(tour_id: tour.id).last(10)
+        -if results.present?
+          %ul.list-group
+            %table.table.table-hover
+              %tr.active
+                %td Дата и время
+                %td Хозяин
+                %td Гость
+              -results.each do |schedule|
+                %tr
+                  %td=l schedule.timestamp, format: :short
+                  %td=schedule.home_team.name
+                  %td=schedule.guest_team.name
     -else
       .text-center Расписание на следующий тур пока не создано
-
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
