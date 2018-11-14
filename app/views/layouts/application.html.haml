@@ -20,118 +20,15 @@
   %body
     .wrapper
       .content
-    
-        #label_bar
-          .row
-            .col-md-8
-              .pull-left
-                %a{:href => "/", title: 'На главную'}
-                  =image_tag("brand.png", size: "75")
-                Комитет по футзалу Карагандинской областной ассоциации футбола
-            
-            .col-md-4
-              .well.pull-right
-            
-                =image_tag("sponsor1.png", size: "60", title: "Мини-футбольный клуб 'Тулпар'")  
-                =image_tag("sponsor3.png", height: "55",width:"110", title: "KAZ GLOBAL TREVEL")
-                =image_tag("sponsor2.png", size: "60", title: "Спорткомплекс 'Тулпар'")  
-
-        #custom-bootstrap-menu.navbar.navbar-default.my_menu{:role => "navigation"}
-          .container-fluid
-            .navbar-header
-              %a.navbar-brand{:href => "#"} 
-
-              %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
-                %span.sr-only Toggle navigation
-                %span.icon-bar
-                %span.icon-bar
-                %span.icon-bar
-            .collapse.navbar-collapse.navbar-menubuilder
-              %ul.nav.navbar-nav.navbar-left
-                %li{class: request.path==root_path ? 'active':''}
-                  =link_to root_path do                    
-                    %i.fa.fa-home
-                    Главная
-                %li{class: request.path.match('doc') ? 'active':''}
-                  =link_to doc_index_path do
-                    %i.fa.fa-book
-                    Документы
-                %li{class: request.path==referee_path ? 'active':''}
-                  =link_to referee_path do                    
-                    %i.fa.fa-id-card
-                    Судьи
-                -if League.count>0&&Team.count>0        
-                  %li.dropdown{class: (request.path.match('team')&&!request.path.match('table')) ? 'active':''}
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      %i.fa.fa-futbol-o
-                      Команды
-                      %span.caret
-                    %ul.dropdown-menu
-                      -League.all.each do |l|          
-                        %li
-                          %a{:href => team_index_path(league_id: l.id)}=l.name
-
-                -if League.count>0&&Team.count>0        
-                  %li.dropdown{class: request.path.match('table') ? 'active':''}
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      %i.fa.fa-table
-                      Таблицы
-                      %span.caret
-                    %ul.dropdown-menu
-                      -League.all.each do |l|          
-                        %li
-                          %a{:href => team_position_table_path(l.id)}=l.name
-
-                
-                %li{class: request.path==items_path ? 'active':''}
-                  =link_to items_path do                    
-                    %i.fa.fa-file
-                    Новости
-                %li{class: request.path==contacts_path ? 'active':''}
-                  =link_to contacts_path do                    
-                    %i.fa.fa-phone
-                    Контакты
-
-              %ul.nav.navbar-nav.navbar-right              
-                -if user_signed_in? 
-                  
-                  %li
-                    =link_to destroy_user_session_path, :method => :delete, title:'Выйти' do
-                      %i.fa.fa-sign-out
-                  -if current_user.active_admin
-                    %li  
-                      =link_to rails_admin_path, title: 'панель администратора' do
-                        %i.fa.fa-user-o
-                -else
-                  %li    
-                    =link_to new_user_session_path do
-                      %i.fa.fa-sign-in
+        =render 'share/label_bar'
+        =render 'share/topbar'
 
 
         .row
           .col-md-10.col-md-offset-1
             = yield
-      #scroller
+        =render 'share/footer'
     
-      .footer
-        .row
-          .col-md-12
-            .text-center
-              %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}
-                =image_tag("fifa.png", size: "55")
-
-
-              %a{:href => "https://uefa.com", target: :blank, title: 'Переход на официальный сайт UEFA'}
-                =image_tag("uefa.png", size: "55")
-
-              %a{:href => "https://koaf.kz", target: :blank, title: 'Переход на официальный сайт КОАФ'}
-                =image_tag("koaf.png", size: "55")
-
-        .row
-          .col-md-12
-            .text-center
-              \&#xA9; 2018 Все права защищены. Копирование допускается с указанием на первоисточник.
-
 :javascript
     $(window).scroll(function () {
         if ($(this).scrollTop() > 0) {
