@@ -10,7 +10,7 @@
     -if @tours.present?
       -@tours.each do |tour|
         %h3.text-center.bg-success=tour.name
-        - summary = Schedule.finished.where(tour_id: tour.id).where(guest_team_id: Team.where(league_id: params[:id]).pluck(:id)).last(10)
+        - summary = tour.schedules.finished.where(tour_id: tour.id).where(guest_team_id: @teams).last(10)
         %table.table.table-hover
           %tr.active
 
@@ -19,7 +19,7 @@
             %td.text-center команда-гость
             %td.text-center.info счет
             %td статистика
-          -summary.each_with_index do |s, index|
+          -summary.each do |s|
             %tr
               %td.text-center.info=l s.timestamp, format: :short
               %td.text-center
