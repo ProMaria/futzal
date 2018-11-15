@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2018_11_14_075325) do
     t.integer "schedule_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.binary "data"
+    t.string "filename"
+    t.string "mime_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "goal_leaders", force: :cascade do |t|
     t.bigint "team_id"
     t.string "fio"
