@@ -1,20 +1,8 @@
--#-league_name = League.find(params[:league_id]).name
--#.panel.panel-success
--#  .panel-heading
--#    .row
--#      .col-md-12
--#        Команды. #{league_name}.
--#  .panel-body
--#    -@teams.each_with_index do |t,i|
--#      %p
--#        #{i+1}.   #{link_to t.name, team_path(t.id)}
--#
--#        %p
--#        =link_to  t.image.url(:original, false), target: :blank do
--#
--#          #{image_tag t.image.url(:small) if t.image.present?}
 
 -league_name = League.find(params[:league_id]).name
+- title 'Команды '+"#{league_name}"
+- meta_tag :description, 'Команды, принимающие участие в соревнованиях по футзалу Карагандинской области 2018-2019'
+- meta_tag :keywords, 'Команды, футзал, Караганда, Карагандинская область, 2018 год, расписание игр футзал, '+"#{league_name}"
 .panel.panel-success
   .panel-heading
     .row

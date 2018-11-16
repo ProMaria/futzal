@@ -1,3 +1,6 @@
+- title 'Контакты'
+- meta_tag :description, 'Контактные данные КОАФ'
+- meta_tag :keywords, 'КОАФ контакт'
 .panel.panel-success
   .panel-heading
     Контактная информация
@@ -5,9 +8,5 @@
     -if @text.present?
       -@text.each do |c|
         %p=c.body
-              
-              
-              
-              
-              
-              
+    -else
+      .text-center Пока не создано ни одной записи о контактах
