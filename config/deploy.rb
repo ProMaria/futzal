@@ -18,7 +18,7 @@ set :branch, 'master'
 
 # Optional settings:
    set :user, 'masha'          # Username in the server to SSH to.
-#   set :port, '30000'           # SSH port number.
+   set :port, '100'           # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
 
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
