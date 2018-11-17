@@ -160,6 +160,22 @@ body {
   padding: 10px; /* добавляем отступы с каждой стороны */
   box-sizing: border-box; /* меняем способ вычисления ширины */
 }
+.photo_large {
+  
+  max-width: 100%; /* устанавливаем ширину элемента */
+  padding: 10px; /* добавляем отступы с каждой стороны */
+  box-sizing: border-box; /* меняем способ вычисления ширины */
+}
+.photo_large img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  padding: 5px;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+
+
 .photo img {
   display: block;
   max-width: 100%;
@@ -182,7 +198,16 @@ body {
   text-align: center;
   margin-top: 20px;
 }
-
+.leader_team{
+  background-color: yellow;
+  color: black;
+}
+.team-well{
+  background-color: ghostwhite;
+  padding: 1em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 5px;
+}
 @media only screen and (max-width: 700px) {
   #label_bar {
     font-size: 16px;

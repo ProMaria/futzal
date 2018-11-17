@@ -3,28 +3,65 @@
     .row
       .col-md-12
         .row
-          .col-md-10
+          .col-md-9
             Состав команды
-          .col-md-2
-            .pull-right
-              =link_to team_index_path(league_id: @team.league_id), title:'назад' do
-                %i.fa.fa-arrow-left
+          
+          .col-md-3
+            =render 'share/social_share'
   .panel-body 
-    %h3.text-center
-      #{@team.name}. #{@team.league.name}
-    %p.text-center 
-      =link_to  @team.image.url(:original, false), target: :blank do
-        #{image_tag @team.image.url(:big) if @team.image.present?}
+    .row
+      .col-md-12
+        %h3.text-center
+          #{@team.name}. #{@team.league.name}
+    .row
+      .col-md-12
+        .text-center 
+          .photo_large
+            =link_to  @team.image.url(:original, false), target: :blank do
+              #{image_tag @team.image.url(:big) if @team.image.present?}
 
     
-    %br
-    -if @players.present?
-      %h3.text-center Состав команды:
-      -@players.each_with_index  do |p,i|
-        %p
-          #{i+1}. #{p.fi}
-          -if p.year.present?
-            (#{p.year})
-          , #{p.amplua.name}
-    -else
-      .text-center состав не указан
+    .row
+      .col-md-6  
+        .team-well  
+          -if @players.present?
+            %h3
+              %i.fa.fa-male 
+              Состав команды:
+            -@players.each_with_index  do |p,i|
+              %p
+                #{i+1}. #{p.fi}
+                -if p.year.present?
+                  (#{p.year})
+                , #{p.amplua.name}
+                / -if GoalLeader.find_by_player_id(p.id).present?
+
+          -else
+            .text-center состав не указан
+      .col-md-6
+        
+        -if @result.present?
+          .team-well 
+            %h3 
+              %i.fa.fa-table
+              Турнирное положение на #{Time.now.strftime('%d.%m.%Y')}:
+            %p Сыграно матчей: #{@result.count_game}
+            %p Выигрыш: #{@result.count_win}
+            %p Ничья: #{@result.count_pat}
+            %p Поражение: #{@result.count_lost}
+            %p Забито мячей: #{@result.count_ball_create}
+            %p Пропущено мячей: #{@result.count_ball_lost}
+            %p Разница мячей:  #{@result.sub_ball}
+            %p Место:  #{@result.place}
+        -if @goal_leaders.present?
+          %br
+          .team-well 
+            %h3
+              %i.fa.fa-futbol-o
+              Бомбардиры турнира
+            -@goal_leaders.each_with_index do |l,i|
+              %p
+                #{i+1}.
+                =l.fio
+                =l.goal
+                гола

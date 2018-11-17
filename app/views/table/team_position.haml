@@ -1,11 +1,10 @@
 - title 'Таблицы'
 - meta_tag :description, 'Таблицы игр, бомбардиры, статистика соревнований по футзалу Карагандинской области 2018-2019'
 - meta_tag :keywords, 'Таблицы игр, бомбардиры, статистика, Футзал, Караганда, Карагандинская область, 2018 год, '+"#{@league_name}"
+-counter = params[:id].to_i==1 ? 4 :3
+
 .panel.panel-success
-  .panel-heading
-    .row
-      .col-md-12
-        Таблицы игр, бомбардиры, статистика. #{@league_name}.
+  =render 'panel_heading'
   .panel-body 
     %h3 #{@league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
     =render 'nav'
@@ -26,7 +25,7 @@
 
 
       -@table_results.each do |team|
-        %tr
+        %tr{class: counter >0 ? 'leader_team' :''}
           
           %td.text-center=team.place
           %td.text-center=team.team.name          
@@ -38,4 +37,5 @@
           %td.text-center=team.count_ball_lost
           %td.text-center=team.sub_ball
           %td.text-center=team.score
+          -counter-=1
     

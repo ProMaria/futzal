@@ -6,8 +6,11 @@
 .panel.panel-success
   .panel-heading
     .row
-      .col-md-12
+      .col-md-9
         Команды. #{league_name}.
+
+      .col-md-3
+        =render 'share/social_share'
   .panel-body
     -@teams.each do |t|
       .photo

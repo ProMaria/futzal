@@ -20,7 +20,7 @@
           Документы
       %li{class: request.path==referee_path ? 'active':''}
         =link_to referee_path do
-          %i.fa.fa-id-card
+          %i.fa.fa-id-badge
           Судьи
       -if League.count>0&&Team.count>0
         %li.dropdown{class: (request.path.match('team')&&!request.path.match('table')) ? 'active':''}
@@ -51,7 +51,7 @@
           Новости
       %li{class: request.path==contacts_path ? 'active':''}
         =link_to contacts_path do
-          %i.fa.fa-phone
+          %i.fa.fa-envelope
           Контакты
 
     %ul.nav.navbar-nav.navbar-right

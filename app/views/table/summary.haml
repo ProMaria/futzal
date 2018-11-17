@@ -1,9 +1,6 @@
 
 .panel.panel-success
-  .panel-heading
-    .row
-      .col-md-12
-        Таблицы игр и бомбардиры. #{@league_name}.
+  =render 'panel_heading'
   .panel-body 
     %h3 #{@league_name}. Обзор матчей на #{Time.now.strftime('%d.%m.%Y')}.
     =render 'nav'

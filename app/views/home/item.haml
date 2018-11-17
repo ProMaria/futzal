@@ -3,7 +3,11 @@
 - meta_tag :keywords, 'Новости, Футзал, Караганда, Карагандинская область, 2018 год, '+"#{@league_name}"
 .panel.panel-success
   .panel-heading
-    Новости
+    .row
+      .col-md-9
+        Новости
+      .col-md-3
+        =render 'share/social_share'
   .panel-body
     -if @items.present?
       %ul.list-group

@@ -3,7 +3,11 @@
 - meta_tag :keywords, 'КОАФ контакт'
 .panel.panel-success
   .panel-heading
-    Контактная информация
+    .row
+      .col-md-9
+        Контактная информация
+      .col-md-3
+        =render 'share/social_share'
   .panel-body
     -if @text.present?
       -@text.each do |c|

@@ -1,10 +1,7 @@
 
 -league_name = League.find(params[:id]).name
 .panel.panel-success
-  .panel-heading
-    .row
-      .col-md-12
-        Таблицы игр и бомбардиры. #{league_name}.
+  =render 'panel_heading'
   .panel-body 
     %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
     -if current_user.present? && current_user.active_admin  

@@ -4,8 +4,10 @@
 .panel.panel-success
   .panel-heading
     .row
-      .col-md-12
+      .col-md-9
         Документы
+      .col-md-3
+        =render 'share/social_share'
   .panel-body
     -if current_user.present? && current_user.active_admin 
       = form_tag doc_index_path, method: :post, multipart: true do
