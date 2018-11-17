@@ -1,18 +1,19 @@
+- title "#{@team.name}. #{@team.league.name}"
+- meta_tag :description, "#{@team.name}. #{@team.league.name}. Участник соревнований по футзалу Карагандинской области 2018-2019"
+- meta_tag :keywords, "#{@team.name} , Футзал, Караганда, Карагандинская область, 2018 год, "+"#{@league_name}"
+
 .panel.panel-success
   .panel-heading
     .row
       .col-md-12
         .row
           .col-md-9
-            Состав команды
+            #{@team.name}. #{@team.league.name}
           
           .col-md-3
             =render 'share/social_share'
   .panel-body 
-    .row
-      .col-md-12
-        %h3.text-center
-          #{@team.name}. #{@team.league.name}
+        
     .row
       .col-md-12
         .text-center 
