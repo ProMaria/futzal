@@ -22,7 +22,11 @@
             %td статистика
           -summary.each do |s|
             %tr
-              %td.text-center.info=l s.timestamp, format: :short
+              %td.text-center.info
+                -if s.timestamp.present?
+                  =l s.timestamp, format: :short
+                -else
+                  Дата не указана
               %td.text-center
                 =s.home_team.name
 

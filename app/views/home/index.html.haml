@@ -71,7 +71,11 @@
                 %td Гость
               -results.each do |schedule|
                 %tr
-                  %td=l schedule.timestamp, format: :short
+                  %td
+                    -if schedule.timestamp.present?
+                      =l schedule.timestamp, format: :short
+                    -else
+                      Время не указано
                   %td=schedule.home_team.name
                   %td=schedule.guest_team.name
     -else
