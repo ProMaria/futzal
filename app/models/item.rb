@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
     validates :body, presence: true    
     
-    
+    default_scope {order(created_at: :desc)}
     
     has_attached_file :image, {:styles => { :small => "150x150>" },
             

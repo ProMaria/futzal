@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       @text = Referee.all
   end
   def item
-      @items = Item.order(:created_at)      
+      @items = Item.last(20)
   end
   
   def table_result
