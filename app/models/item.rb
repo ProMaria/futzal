@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     
     validates_attachment :image,
                      content_type: { content_type: /\Aimage\/.*\z/ },
-                     size: { less_than: 1.megabyte }
+                     size: { less_than: 5.megabyte }
 
     
 end
