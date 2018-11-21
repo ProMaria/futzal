@@ -12,7 +12,7 @@
       -@tours.each do |tour|
         %h3.text-center.bg-success=tour.name
         - summary = tour.schedules.finished.where(tour_id: tour.id).where(guest_team_id: @teams).last(10)
-        %table.table.table-hover
+        %table.table.table-hover.table-condensed
           %tr.active
 
             %td.text-center.info дата

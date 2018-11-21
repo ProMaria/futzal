@@ -10,7 +10,7 @@
     =render 'nav'
     -if current_user.present? && current_user.active_admin  
       =link_to 'Сформировать положение', futadmin_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
-    %table.table.table-hover
+    %table.table.table-hover.table-condensed
       %tr.active
         %td.text-center место
         %td.text-center команда
