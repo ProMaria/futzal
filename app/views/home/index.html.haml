@@ -47,8 +47,8 @@
           -@results_current.each do |result|
             %tr
               %td=l result.timestamp, format: :short
-              %td=result.home_team.name
-              %td=result.guest_team.name if result.guest_team.present?
+              %td=link_to result.home_team.name, team_path(result.home_team.id), target: :blank, title: "#{result.home_team.league.name}. #{result.home_team.table_result.first.place} место. Перейти на страницу команды"
+              %td=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank, title: "#{result.guest_team.league.name}. #{result.guest_team.table_result.first.place} место. Перейти на страницу команды" if result.guest_team.present?
               %td=result.result
     -else
       .text-center Результатов нет
@@ -60,7 +60,7 @@
     -if @schedules_future.present?
       %h3.text-center=@tour_future.name
       %ul.list-group
-        %table.table.table-hover
+        %table.table.table-hover.table-condensed
           %tr.active
             %td Дата и время
             %td Хозяин
@@ -71,8 +71,8 @@
                 -if schedule.timestamp.present?
                   =l schedule.timestamp, format: :short
                 -else
-                  Время не указано
-              %td=schedule.home_team.name
-              %td=schedule.guest_team.name
+                  Не указано
+              %td=link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank, title: "#{schedule.home_team.league.name}. #{schedule.home_team.table_result.first.place} место. Перейти на страницу команды"
+              %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank, title: "#{schedule.guest_team.league.name}. #{schedule.guest_team.table_result.first.place} место. Перейти на страницу команды"
     -else
       .text-center Расписание на следующий тур пока не создано
