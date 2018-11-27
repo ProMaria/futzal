@@ -114,8 +114,7 @@ RailsAdmin.config do |config|
     
   end
   config.model Item do
-        field :title
-        field :body_preview
+        field :title        
         field :body
         field :image
     

@@ -19,7 +19,7 @@
             %td.text-center команда-хозяйка
             %td.text-center команда-гость
             %td.text-center.info счет
-            %td статистика
+            %td обзор
           -summary.each do |s|
             %tr
               %td.text-center.info
@@ -35,6 +35,8 @@
               %td.text-center.info=s.result
 
               %td
+                -if s.summary.present?
+                  %a{:href => s.summary, target: :blank, title: 'Переход на наш канал в YouTube'} Смотреть
                 -Doc.where(schedule_id: s.id).each do |d|
                   %p                   
 
