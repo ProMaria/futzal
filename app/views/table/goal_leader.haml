@@ -14,10 +14,8 @@
         %td.text-center игрок
         %td.text-center команда
         %td.text-center голы
-       
       -@leaders.each_with_index do |leader, index|
         %tr
-         
           %td.text-center=index+1
           %td.text-center=leader.fio
           %td.text-center=leader.team.name

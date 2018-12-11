@@ -7,10 +7,11 @@
   .panel-body
     -if @text.present?
       -@text.each_with_index do |c, index|
-        %p
-          #{index+1}. 
+        .photo
           #{image_tag c.image.url(:small) if c.image.present?} 
-          #{c.fio if c.fio.present?}, 
-          #{c.city if c.city.present?}, 
-          #{c.category if c.category.present?}  
-          #{c.comment if c.comment.present?}
+          =image_tag("no_foto.jpg") unless c.image.exists?
+          %figcaption
+            #{c.fio if c.fio.present?},
+            #{c.city if c.city.present?},
+            #{c.category if c.category.present?}
+            #{c.comment if c.comment.present?}
