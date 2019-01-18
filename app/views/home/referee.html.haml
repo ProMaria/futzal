@@ -8,7 +8,7 @@
     -if @text.present?
       -@text.each_with_index do |c, index|
         .photo
-          #{image_tag c.image.url(:small) if c.image.present?} 
+          #{image_tag c.image.url(:big) if c.image.present?} 
           =image_tag("no_foto.jpg") unless c.image.exists?
           %figcaption
             #{c.fio if c.fio.present?},
