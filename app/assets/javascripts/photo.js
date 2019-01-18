@@ -1,7 +1,7 @@
 $(document).ready(function() {
       
     var selectTag = $("#tour_id");
-	selectTag.bind('click  touchstart', function(){
+	selectTag.bind('change click select', function(){
 
 		//console.log($(this).children("option:selected").val());
 		$.ajax({
