@@ -19,7 +19,9 @@ Rails.application.routes.draw do
       get 'summary'
     end    
   end
-      
+  resources :photo, only: [:index, :show] do
+    # /ost 'show_photo'
+  end
   get "/futadmin/generate"=>"futadmin#generate"
 
   resources :doc do

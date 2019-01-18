@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_075325) do
+ActiveRecord::Schema.define(version: 2019_01_16_190326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,15 +34,6 @@ ActiveRecord::Schema.define(version: 2018_11_14_075325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "schedule_id"
-  end
-
-  create_table "documents", force: :cascade do |t|
-    t.string "name"
-    t.binary "data"
-    t.string "filename"
-    t.string "mime_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "goal_leaders", force: :cascade do |t|
@@ -69,6 +60,15 @@ ActiveRecord::Schema.define(version: 2018_11_14_075325) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.bigint "tour_id"
+    t.index ["tour_id"], name: "index_photos_on_tour_id"
   end
 
   create_table "players", force: :cascade do |t|

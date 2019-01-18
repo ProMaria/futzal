@@ -20,6 +20,7 @@ ru:
       amplua: амплуа
       player: игрок
       table_result: положение команд
+      photo: фотографии
       
     attributes:
       item:
@@ -80,7 +81,9 @@ ru:
         league: лига
         team: команда
         place: место
-        
+      photo:
+        tour: тур 
+        image: изображение
   date:
     abbr_day_names:
     - Вс

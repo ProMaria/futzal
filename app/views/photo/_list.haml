@@ -1,0 +1,8 @@
+-if @photos.present?  
+  -@photos.each do |t|
+    .photo
+
+      =link_to  t.image.url(:original, false), target: :blank, title: 'Увеличить фото на отдельной странице' do
+        #{image_tag t.image.url(:big) if t.image.present?}
+-else
+  %h3.text-center нет фото для этого тура

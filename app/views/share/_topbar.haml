@@ -53,6 +53,10 @@
         =link_to contacts_path do
           %i.fa.fa-envelope
           Контакты
+      %li{class: request.path==photo_index_path ? 'active':''}
+        =link_to photo_index_path do
+          %i.fa.fa-photo
+          Фотографии
       %li{class: request.path==contacts_path ? 'active':''}
         %a{:href => "https://www.youtube.com/channel/UC8vcDQ7ZAhLs-T8KEMixMSw", target: :blank, title: 'Переход на наш канал в YouTube'} 
           %i.fa.fa-youtube-play

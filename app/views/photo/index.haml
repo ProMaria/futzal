@@ -1,0 +1,22 @@
+- title 'Фото '+"#{@tour_name}"
+- meta_tag :description, 'Фото матчей в рамках проведения соревнованиий по футзалу Карагандинской области 2018-2019'
+- meta_tag :keywords, 'Фото, футзал, Караганда, Карагандинская область, 2018 год, +"#{@tour_name}"'
+=javascript_include_tag 'photo'
+.panel.panel-success
+  .panel-heading
+    .row
+      .col-md-9
+        Фото /
+        %span#tourName
+          =@tour_name
+        
+
+      .col-md-3
+        =render 'share/social_share'
+  .panel-body
+    .pull-right  
+      Показать фото за 
+      =select_tag :tour_id, options_from_collection_for_select(@tours, "id", "name", @tour_id), selected: @tour_id 
+    %br
+    #list  
+      =render 'list'
