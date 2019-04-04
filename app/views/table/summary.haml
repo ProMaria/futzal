@@ -16,8 +16,13 @@
           %tr.active
 
             %td.text-center.info дата
-            %td.text-center команда-хозяйка
-            %td.text-center команда-гость
+            -unless tour.name.match('финал')  
+              %td.text-center команда-хозяйка
+              %td.text-center команда-гость
+            -else
+              %td.text-center команда
+              %td.text-center команда
+            
             %td.text-center.info счет
             %td обзор
           -summary.each do |s|

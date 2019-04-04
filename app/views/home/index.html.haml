@@ -45,16 +45,7 @@
             %td Гость
             %td Счет
           -@results_current.each do |result|
-            %tr
-              %td
-                -if result.timestamp.present?
-                  =l result.timestamp, format: :short
-                -else
-                  Не указано
-                
-              %td=link_to result.home_team.name, team_path(result.home_team.id), target: :blank, title: "#{result.home_team.league.name}. #{result.home_team.table_result.first.place} место. Перейти на страницу команды"
-              %td=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank, title: "#{result.guest_team.league.name}. #{result.guest_team.table_result.first.place} место. Перейти на страницу команды" if result.guest_team.present?
-              %td=result.result
+            =render 'list', result: result
     -else
       .text-center Результатов нет
 
@@ -81,3 +72,30 @@
               %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank, title: "#{schedule.guest_team.league.name}. #{schedule.guest_team.table_result.first.place} место. Перейти на страницу команды"
     -else
       .text-center Расписание на следующий тур пока не создано
+-if @result_final.present? || @result_semifinal.present?
+  .panel.panel-success
+    .panel-heading
+      Финальные игры. Высшая лига.
+    .panel-body
+      -if @result_semifinal.present?  
+        %h3.text-center Полуфинал
+        %ul.list-group
+          %table.table.table-hover.table-condensed
+            %tr.active
+              %td Дата и время
+              %td Команда
+              %td Команда
+              %td Счет
+            -@result_semifinal.each do |result|
+              =render 'list', result: result
+      -if @result_final.present?  
+        %h3.text-center Финал
+        %ul.list-group
+          %table.table.table-hover.table-condensed
+            %tr.active
+              %td Дата и время
+              %td Команда
+              %td Команда
+              %td Счет
+            -@result_final.each do |result|
+              =render 'list', result: result

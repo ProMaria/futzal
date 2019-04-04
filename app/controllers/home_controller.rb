@@ -3,14 +3,17 @@ class HomeController < ApplicationController
       @items =Item.last(3)
 
 
-      @tour_current = Tour.order(:id).last(2)[0]
+      @tour_current = Tour.current_tours.order(:id).last(2)[0]
 
       @results_current = Schedule.where(tour_id: @tour_current.id)
 
-      @tour_future = Tour.order(:id).last
+      @tour_future = Tour.current_tours.order(:id).last
       @schedules_future = Schedule.where(tour_id: @tour_future.id)
 
       @league = League.all
+
+      @result_final = Schedule.where(tour_id: Tour.final_tours)
+      @result_semifinal = Schedule.where(tour_id: Tour.semifinal_tours)
   end
   def contact
       @text = Contact.all
