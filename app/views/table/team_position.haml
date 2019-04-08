@@ -58,10 +58,10 @@
             %td.text-left.bottom_border{colspan:2}=@teams[0].team.name
             %td.no_border
             %td.text-left.bottom_border.right_border
-              -if @results_first_place.count>2
+              -if @results_first_place.present? && @results_first_place.count>2
                 3 матч #{@results_first_place.present?&&@results_first_place[2].present? ? '('+@results_first_place[2].timestamp.strftime('%d.%m.%Y')+')' : ''}
             %td.text-center.bottom_border
-              -if @results_first_place.count>2
+              -if @results_first_place.present? && @results_first_place.count>2
                 =@winner_first_semifinal
                 -
                 =@winner_second_semifinal
