@@ -46,6 +46,7 @@ class TableController < ApplicationController
             if Team.where(name: @lost_first_semifinal).present? && Team.where(name: @lost_second_semifinal).present?
                 results_third_place = Schedule.joins(:tour).where("tours.name ~ 'финал'").where('schedules.home_team_id =? and schedules.guest_team_id =? ', Team.find_by_name(@lost_first_semifinal).id, Team.find_by_name(@lost_second_semifinal).id )            
                 @results_third_place=results_third_place.present? ? results_third_place.first.result : 'матч не сыгран'
+                @date_third_place=results_third_place.present? ? results_third_place.first.timestamp.strftime('%d.%m.%Y') : ''
             end
 
             #Финал
