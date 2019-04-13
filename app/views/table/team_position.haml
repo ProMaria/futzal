@@ -58,7 +58,7 @@
             %td.text-left.bottom_border{colspan:2}=@teams[0].team.name
             %td.no_border
             %td.text-left.bottom_border.right_border
-              -if @results_first_place.present? && @results_first_place.count>2
+              -if @results_first_place.present? && @results_first_place.count>2 && @results_first_place[2].timestamp.present?
                 3 матч #{@results_first_place.present?&&@results_first_place[2].present? ? '('+@results_first_place[2].timestamp.strftime('%d.%m.%Y')+')' : ''}
             %td.text-center.bottom_border
               -if @results_first_place.present? && @results_first_place.count>2
@@ -73,7 +73,7 @@
             %td.right_border.text-center{colspan:3}
               %strong=@results_first_semi           
             %td.no_border
-            %td.text-left.bottom_border.right_border 2 матч #{@results_first_place.present?&&@results_first_place[1].present? ? '('+@results_first_place[1].timestamp.strftime('%d.%m.%Y')+')' : ''}
+            %td.text-left.bottom_border.right_border 2 матч #{@results_first_place.present?&&@results_first_place[1].present?&&@results_first_place[1].timestamp.present? ? '('+@results_first_place[1].timestamp.strftime('%d.%m.%Y')+')' : ''}
             %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
             %td.text-center.bottom_border
               %strong=@results_first_place.present?&&@results_first_place[1].present? ? @results_first_place[1].result : ''
@@ -85,7 +85,7 @@
               %strong №4
             %td.text-left.bottom_border.right_border{colspan:2}=@teams[3].team.name
             %td.no_border
-            %td.text-left.bottom_border.right_border 1 матч #{@results_first_place.present?&&@results_first_place[0].present? ? '('+@results_first_place[0].timestamp.strftime('%d.%m.%Y')+')' : ''}
+            %td.text-left.bottom_border.right_border 1 матч #{@results_first_place.present?&&@results_first_place[0].present?&&@results_first_place[0].timestamp.present? ? '('+@results_first_place[0].timestamp.strftime('%d.%m.%Y')+')' : ''}
             %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
             %td.text-center.bottom_border
               %strong=@results_first_place.present?&&@results_first_place[0].present? ? @results_first_place[0].result : ''

@@ -1,19 +1,19 @@
 class HomeController < ApplicationController
   def index
       @items =Item.last(3)
+      @result_semifinal = Schedule.where(tour_id: Tour.semifinal_tours)
 
+      @tour_current = Tour.current_tours.order(:id).last(1)[0]
 
-      @tour_current = Tour.current_tours.order(:id).last(2)[0]
-
-      @results_current = Schedule.where(tour_id: @tour_current.id)
+      @results_current = Schedule.where(tour_id: @tour_current.id) if !@result_semifinal.first.result.present?
 
       @tour_future = Tour.current_tours.order(:id).last
-      @schedules_future = Schedule.where(tour_id: @tour_future.id)
+      @schedules_future = Schedule.where(tour_id: @tour_future.id) if !@tour_future.name.match('22')
 
       @league = League.all
 
       @result_final = Schedule.where(tour_id: Tour.final_tours)
-      @result_semifinal = Schedule.where(tour_id: Tour.semifinal_tours)
+      
   end
   def contact
       @text = Contact.all

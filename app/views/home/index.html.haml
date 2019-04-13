@@ -30,12 +30,12 @@
     -else
       .text-center Пока не создано ни одной новости
 
-
-.panel.panel-success
-  .panel-heading
-    Расписание и результаты текущего тура
-  .panel-body
-    -if @results_current.present?
+-if @results_current.present?
+  .panel.panel-success
+    .panel-heading
+      Расписание и результаты текущего тура
+    .panel-body
+    
       %h3.text-center=@tour_current.name
       %ul.list-group
         %table.table.table-hover.table-condensed
@@ -46,14 +46,13 @@
             %td Счет
           -@results_current.each do |result|
             =render 'list', result: result
-    -else
-      .text-center Результатов нет
 
-.panel.panel-success
-  .panel-heading
-    Расписание следующего тура
-  .panel-body
-    -if @schedules_future.present?
+-if @schedules_future.present?
+  .panel.panel-success
+    .panel-heading
+      Расписание следующего тура
+    .panel-body
+    
       %h3.text-center=@tour_future.name
       %ul.list-group
         %table.table.table-hover.table-condensed
@@ -70,8 +69,7 @@
                   Не указано
               %td=link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank, title: "#{schedule.home_team.league.name}. #{schedule.home_team.table_result.first.place} место. Перейти на страницу команды"
               %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank, title: "#{schedule.guest_team.league.name}. #{schedule.guest_team.table_result.first.place} место. Перейти на страницу команды"
-    -else
-      .text-center Расписание на следующий тур пока не создано
+    
 -if @result_final.present? || @result_semifinal.present?
   .panel.panel-success
     .panel-heading
