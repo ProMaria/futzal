@@ -33,4 +33,13 @@
                 -if h.present? || g.present?  
                   %hr
                 #{g}
+                
+                -if home.present?&&home.count>1
+                  -h2=home.second.present? ? home.second.result : ""
+                  %hr
+                  #{h2}
+                -elsif guest.present?&&guest.count>1
+                  -g2=guest.second.present? && guest.second.result.present? ? guest.second.result.split(':')[1]+':'+guest.second.result.split(':')[0] : ""
+                  %hr
+                  #{g2}
             -i+=1
