@@ -1,11 +1,12 @@
 - title 'Главная'
 - meta_tag :description, 'Расписание следующего тура, итоги прошедшего тура, новости соревнований по футзалу Карагандинской области 2018-2019'
 - meta_tag :keywords, 'Футзал, Караганда, Карагандинская область, 2018 год, расписание игр футзал'
-.panel.panel-success
-  .panel-heading
-    Новости
-  .panel-body
-    -if @items.present?
+-if @items.present?
+  .panel.panel-success
+    .panel-heading
+      Новости
+    .panel-body
+    
       %ul.list-group
         -@items.each do |item|
           %li.list-group-item
@@ -27,9 +28,7 @@
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
                   
-    -else
-      .text-center Пока не создано ни одной новости
-
+    
 -if @results_current.present?
   .panel.panel-success
     .panel-heading
