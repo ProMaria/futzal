@@ -17,29 +17,31 @@
       -@teams.each_with_index do |team, index|
         %tr
           %td.text-center=index+1
-          %td.text-center=team.name
+          %td.text-center=Team.find(team).name
           -i =1
           -@teams.each  do |t| 
-            -if team.id==t.id
+            -if team==t
               %td.text-center{style: 'background-color: rgba(59, 227, 59, 1);'} 
             -else
-              -home=Schedule.where(home_team_id: team.id, guest_team_id: t.id)
-              -guest=Schedule.where(guest_team_id: team.id, home_team_id: t.id)
+              -home=Schedule.where(home_team_id: team, guest_team_id: t)
+              -guest=Schedule.where(guest_team_id: team, home_team_id: t)
+              -all=Schedule.joins(:tour).where("tours.name !~ 'финал'").where("home_team_id= #{team} and guest_team_id=#{t} or guest_team_id=#{team} and home_team_id=#{t}").order(:timestamp)
               %td.text-center
-                -h=home.first.present? ? home.first.result : ""
-                -g=guest.first.present? && guest.first.result.present? ? guest.first.result.split(':')[1]+':'+guest.first.result.split(':')[0] : ""
+                -counter = all.length
+                -all.each do |a|                  
+                  
+                  -if a.home_team_id==team
+                    =a.result
+                    -counter-=1
+                    
+                  -elsif a.guest_team_id==team
+                    =a.result.present? ? a.result.split(':')[1]+':'+a.result.split(':')[0] : ""
+                    -counter-=1
+                  -if counter>0
+                    %hr
+                    
+                  
+                   
+                  
                 
-                #{h}
-                -if h.present? || g.present?  
-                  %hr
-                #{g}
-                
-                -if home.present?&&home.count>1
-                  -h2=home.second.present? ? home.second.result : ""
-                  %hr
-                  #{h2}
-                -elsif guest.present?&&guest.count>1
-                  -g2=guest.second.present? && guest.second.result.present? ? guest.second.result.split(':')[1]+':'+guest.second.result.split(':')[0] : ""
-                  %hr
-                  #{g2}
             -i+=1

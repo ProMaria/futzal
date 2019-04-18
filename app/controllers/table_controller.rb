@@ -60,7 +60,7 @@ class TableController < ApplicationController
     end   
     
     def match_result
-        @teams = Team.where(league_id: params[:id])        
+        @teams = TableResult.where(league_id: params[:id]).order(:place).pluck(:team_id)      
     end
     def goal_leader        
         @leaders = GoalLeader.joins(:team).where('teams.league_id=?', params[:id]).order('goal_leaders.goal desc')
