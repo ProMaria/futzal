@@ -9,6 +9,11 @@ class Tour < ApplicationRecord
     def self.final_tours
     	Tour.where("name ~*'финал' and name !~*'полу'").pluck(:id)
     end
+
+    def self.third_tours
+        Tour.where("name ~*'3 место'").pluck(:id)
+    end
+
     def self.semifinal_tours
     	Tour.where("name ~*'полу'").pluck(:id)
     end

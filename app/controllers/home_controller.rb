@@ -13,6 +13,7 @@ class HomeController < ApplicationController
       @league = League.all
 
       @result_final = Schedule.where(tour_id: Tour.final_tours)
+      @result_final_third = Schedule.where(tour_id: Tour.third_tours)
       
   end
   def contact

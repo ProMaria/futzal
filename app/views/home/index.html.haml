@@ -85,6 +85,17 @@
               %td Счет
             -@result_semifinal.each do |result|
               =render 'list', result: result
+      -if @result_final_third.present?  
+        %h3.text-center Матч за 3 место
+        %ul.list-group
+          %table.table.table-hover.table-condensed
+            %tr.active
+              %td Дата и время
+              %td Команда
+              %td Команда
+              %td Счет
+            -@result_final_third.each do |result|
+              =render 'list', result: result
       -if @result_final.present?  
         %h3.text-center Финал
         %ul.list-group
