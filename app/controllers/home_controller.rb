@@ -8,7 +8,8 @@ class HomeController < ApplicationController
       @results_current = Schedule.where(tour_id: @tour_current.id) if !@result_semifinal.first.result.present?
 
       @tour_future = Tour.current_tours.order(:id).last
-      @schedules_future = Schedule.where(tour_id: @tour_future.id) if !@tour_future.name.match('22')
+      @schedules_future = nil
+      Schedule.where(tour_id: @tour_future.id) if @tour_future.name.match('тур')
 
       @league = League.all
 
