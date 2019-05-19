@@ -5,7 +5,10 @@
   =render 'panel_heading'
   .panel-body 
     =render 'nav'
-    %h3 #{@league_name}. Результаты матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    -if params[:old].blank?
+      %h3 #{@league_name}. Результаты матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    -else
+      %h3 #{@league_name}. Результаты матчей сезона #{League.unscoped.find(params[:id]).season.name}
     %table.table.table-hover.table-bordered.table-condensed
       %tr
         %td
@@ -17,15 +20,16 @@
       -@teams.each_with_index do |team, index|
         %tr
           %td.text-center=index+1
-          %td.text-center=Team.find(team).name
+          %td.text-center=Team.unscoped.find(team).name
           -i =1
           -@teams.each  do |t| 
             -if team==t
               %td.text-center{style: 'background-color: rgba(59, 227, 59, 1);'} 
             -else
-              -home=Schedule.where(home_team_id: team, guest_team_id: t)
-              -guest=Schedule.where(guest_team_id: team, home_team_id: t)
-              -all=Schedule.joins(:tour).where("tours.name !~ 'финал'").where("home_team_id= #{team} and guest_team_id=#{t} or guest_team_id=#{team} and home_team_id=#{t}").order(:timestamp)
+              -home=Schedule.unscoped.where(home_team_id: team, guest_team_id: t)
+              -guest=Schedule.unscoped.where(guest_team_id: team, home_team_id: t)
+              -tour = Tour.unscoped.where("tours.name !~ 'финал'").ids
+              -all=Schedule.unscoped.where("home_team_id= #{team} and guest_team_id=#{t} or guest_team_id=#{team} and home_team_id=#{t}").where(tour_id: tour).order(:timestamp)
               %td.text-center
                 -counter = all.length
                 -all.each do |a|                  

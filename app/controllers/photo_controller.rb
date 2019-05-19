@@ -5,11 +5,11 @@ class PhotoController < ApplicationController
 	      @photos = Tour.find(@tour_id).photos
 	      @tours = Tour.where(id: Photo.pluck(:tour_id))
 		else
-			@tour_id = Tour.last.id
+			@tour_id = Tour.last.id if Tour.last.present?
 			@tours = Tour.all
 			@photos = []
 	  	end
-	  	@tour_name = Tour.find(@tour_id).name
+	  	@tour_name = Tour.find(@tour_id).name if @tour_id.present?
     end
 
     def show

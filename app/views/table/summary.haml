@@ -6,7 +6,10 @@
 .panel.panel-success
   =render 'panel_heading'
   .panel-body 
-    %h3 #{@league_name}. Обзор матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    -if params[:old].blank?
+      %h3 #{@league_name}. Обзор матчей на #{Time.now.strftime('%d.%m.%Y')}.
+    -else
+      %h3 #{@league_name}. Обзор матчей сезона #{League.unscoped.find(params[:id]).season.name}
     =render 'nav'
     -if @tours.present?
       -@tours.each do |tour|
@@ -33,10 +36,10 @@
                 -else
                   Дата не указана
               %td.text-center
-                =s.home_team.name
+                =Team.unscoped.find(s.home_team_id).name
 
               %td.text-center
-                =s.guest_team.name
+                =Team.unscoped.find(s.guest_team_id).name
               %td.text-center.info=s.result
 
               %td

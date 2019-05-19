@@ -75,6 +75,12 @@ RailsAdmin.config do |config|
 
   config.model League do
         field :name
+        field :season
+    
+  end
+  config.model Season do
+        field :name
+        field :current
     
   end
   
@@ -103,6 +109,7 @@ RailsAdmin.config do |config|
 
   config.model Tour do
         field :name
+        field :season
     
   end
   config.model Amplua do
@@ -133,9 +140,11 @@ RailsAdmin.config do |config|
         field :team
         field :fio
         field :goal
-        field :league do
-         formatted_value{ bindings[:object].team.league.name }
-        end
+        field :season
+        # field :league do
+         # formatted_value{ bindings[:object].unscoped.team.league.name }
+        # end
+
         end
   end  #  #
 end

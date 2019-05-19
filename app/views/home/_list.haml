@@ -5,6 +5,8 @@
     -else
       Не указано
 
-  %td=link_to result.home_team.name, team_path(result.home_team.id), target: :blank, title: "#{result.home_team.league.name}. #{result.home_team.table_result.first.place} место. Перейти на страницу команды"
-  %td=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank, title: "#{result.guest_team.league.name}. #{result.guest_team.table_result.first.place} место. Перейти на страницу команды" if result.guest_team.present?
+  %td=link_to result.home_team.name, team_path(result.home_team.id), target: :blank
+  
+  %td=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
+  
   %td=result.result

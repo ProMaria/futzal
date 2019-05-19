@@ -5,8 +5,7 @@
   .panel.panel-success
     .panel-heading
       Новости
-    .panel-body
-    
+    .panel-body    
       %ul.list-group
         -@items.each do |item|
           %li.list-group-item
@@ -66,8 +65,9 @@
                   =l schedule.timestamp, format: :short
                 -else
                   Не указано
-              %td=link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank, title: "#{schedule.home_team.league.name}. #{schedule.home_team.table_result.first.place} место. Перейти на страницу команды"
-              %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank, title: "#{schedule.guest_team.league.name}. #{schedule.guest_team.table_result.first.place} место. Перейти на страницу команды"
+              %td=link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank
+              
+              %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
     
 -if @result_final.present? || @result_semifinal.present?
   .panel.panel-success

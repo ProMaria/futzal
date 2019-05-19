@@ -5,118 +5,126 @@
 
 .panel.panel-success
   =render 'panel_heading'
-  .panel-body 
-    %h3 #{@league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
-    =render 'nav'
-    -if current_user.present? && current_user.active_admin  
+  .panel-body
+    -if current_user.present? && current_user.active_admin && params[:old].blank? 
+       
       =link_to 'Сформировать положение', futadmin_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
-    %table.table.table-hover.table-condensed
-      %tr.active
-        %td.text-center место
-        %td.text-center команда
-        %td.text-center И
-        %td.text-center В
-        %td.text-center Н
-        %td.text-center П
-        %td.text-center з/м
-        %td.text-center п/м
-        %td.text-center р/м
-        %td.text-center О
-
-
-      -@table_results.each do |team|
-        %tr{class: counter >0 ? 'leader_team' :''}
-          
-          %td.text-center=team.place
-          %td.text-center=team.team.name          
-          %td.text-center=team.count_game
-          %td.text-center=team.count_win 
-          %td.text-center=team.count_pat
-          %td.text-center=team.count_lost
-          %td.text-center=team.count_ball_create
-          %td.text-center=team.count_ball_lost
-          %td.text-center=team.sub_ball
-          %td.text-center=team.score
-          -counter-=1
     
-    -if @table_final.present?&&@teams.present?
+    -if @table_results.present?
+      -if params[:old].blank? 
+        %h3 #{@league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+      -else
+        %h3 #{@league_name}. Положение команд сезона #{League.unscoped.find(params[:id]).season.name}
+      =render 'nav'
+      %table.table.table-hover.table-condensed
+        %tr.active
+          %td.text-center место
+          %td.text-center команда
+          %td.text-center И
+          %td.text-center В
+          %td.text-center Н
+          %td.text-center П
+          %td.text-center з/м
+          %td.text-center п/м
+          %td.text-center р/м
+          %td.text-center О
 
-      .table_final
-        
-        %table.table.table-condensed
+
+        -@table_results.each do |team|
+          %tr{class: counter >0 ? 'leader_team' :''}
+            
+            %td.text-center=team.place
+            %td.text-center
+              =Team.unscoped.find(team.team_id).name
+              
+            %td.text-center=team.count_game
+            %td.text-center=team.count_win 
+            %td.text-center=team.count_pat
+            %td.text-center=team.count_lost
+            %td.text-center=team.count_ball_create
+            %td.text-center=team.count_ball_lost
+            %td.text-center=team.sub_ball
+            %td.text-center=team.score
+            -counter-=1
+      %br
+      -if @table_final.present?&&@teams.present?
+
+        .table_final
+          
+          %table.table.table-condensed
+             
+            %tr.top-line
+              %td.text-left{colspan:4} 
+                %h4 Полуфинал №1
+              %td.text-center{colspan:3}
+                %h2.text-success Финал
+              %td.text-right{colspan:4} 
+                %h4 Полуфинал №2
+            %tr
+              %td.text-left.no_border
+                %strong №1
+              %td.text-left.bottom_border{colspan:2}=@teams[0].team.name
+              %td.no_border
+              %td.text-left.bottom_border.right_border
+                -if @results_first_place.present? && @results_first_place.count>2 && @results_first_place[2].timestamp.present?
+                  3 матч #{@results_first_place.present?&&@results_first_place[2].present? ? '('+@results_first_place[2].timestamp.strftime('%d.%m.%Y')+')' : ''}
+              %td.text-center.bottom_border
+                -if @results_first_place.present? && @results_first_place.count>2
+                  #{@winner_first_semifinal} - #{@winner_second_semifinal}
+              %td.text-center.bottom_border
+                %strong=@results_first_place.present?&&@results_first_place[2].present? ? @results_first_place[2].result : ''
+              %td.no_border
+              %td.text-right.bottom_border{colspan:2}=@teams[1].team.name
+              %td.text-right.no_border
+                %strong №2
+            %tr
+              %td.right_border.text-center{colspan:3}
+                %strong=@results_first_semi           
+              %td.no_border
+              %td.text-left.bottom_border.right_border 2 матч #{@results_first_place.present?&&@results_first_place[1].present?&&@results_first_place[1].timestamp.present? ? '('+@results_first_place[1].timestamp.strftime('%d.%m.%Y')+')' : ''}
+              %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
+              %td.text-center.bottom_border
+                %strong=@results_first_place.present?&&@results_first_place[1].present? ? @results_first_place[1].result : ''
+              %td.no_border            
+              %td.left_border.text-center{colspan:3}
+                %strong=@results_second_semi         
+            %tr
+              %td.text-left.no_border
+                %strong №4
+              %td.text-left.bottom_border.right_border{colspan:2}=@teams[3].team.name
+              %td.no_border
+              %td.text-left.bottom_border.right_border 1 матч #{@results_first_place.present?&&@results_first_place[0].present?&&@results_first_place[0].timestamp.present? ? '('+@results_first_place[0].timestamp.strftime('%d.%m.%Y')+')' : ''}
+              %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
+              %td.text-center.bottom_border
+                %strong=@results_first_place.present?&&@results_first_place[0].present? ? @results_first_place[0].result : ''
+              %td.no_border
+              %td.text-right.bottom_border.left_border{colspan:2}=@teams[2].team.name
+              %td.text-right.no_border
+                %strong №3
+            %tr
+              %td.right_border{colspan:2} 
+              %td{colspan:7} 
+              %td.left_border{colspan:2} 
+            %tr
+              %td.right_border{colspan:2} 
+              %td{colspan:7} 
+              %td.left_border{colspan:2} 
+            %tr
+              %td.right_border{colspan:2} 
+              %td.text-center.text-info{colspan:7}
+                %h3 Матч за третье место 
+              %td.left_border{colspan:2} 
+            %tr
+              %td.right_border{colspan:2} 
+              %td.bottom_border{colspan:2} 
+              %td.text-left.bottom_border.right_border=@date_third_place 
+              %td.text-center.bottom_border #{@lost_first_semifinal}-#{@lost_second_semifinal}
+              %td.text-center.bottom_border
+                %strong=@results_third_place
+              %td.bottom_border{colspan:2} 
+              %td.left_border{colspan:2} 
+              
            
-          %tr.top-line
-            %td.text-left{colspan:4} 
-              %h4 Полуфинал №1
-            %td.text-center{colspan:3}
-              %h2.text-success Финал
-            %td.text-right{colspan:4} 
-              %h4 Полуфинал №2
-          %tr
-            %td.text-left.no_border
-              %strong №1
-            %td.text-left.bottom_border{colspan:2}=@teams[0].team.name
-            %td.no_border
-            %td.text-left.bottom_border.right_border
-              -if @results_first_place.present? && @results_first_place.count>2 && @results_first_place[2].timestamp.present?
-                3 матч #{@results_first_place.present?&&@results_first_place[2].present? ? '('+@results_first_place[2].timestamp.strftime('%d.%m.%Y')+')' : ''}
-            %td.text-center.bottom_border
-              -if @results_first_place.present? && @results_first_place.count>2
-                #{@winner_first_semifinal} - #{@winner_second_semifinal}
-            %td.text-center.bottom_border
-              %strong=@results_first_place.present?&&@results_first_place[2].present? ? @results_first_place[2].result : ''
-            %td.no_border
-            %td.text-right.bottom_border{colspan:2}=@teams[1].team.name
-            %td.text-right.no_border
-              %strong №2
-          %tr
-            %td.right_border.text-center{colspan:3}
-              %strong=@results_first_semi           
-            %td.no_border
-            %td.text-left.bottom_border.right_border 2 матч #{@results_first_place.present?&&@results_first_place[1].present?&&@results_first_place[1].timestamp.present? ? '('+@results_first_place[1].timestamp.strftime('%d.%m.%Y')+')' : ''}
-            %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
-            %td.text-center.bottom_border
-              %strong=@results_first_place.present?&&@results_first_place[1].present? ? @results_first_place[1].result : ''
-            %td.no_border            
-            %td.left_border.text-center{colspan:3}
-              %strong=@results_second_semi         
-          %tr
-            %td.text-left.no_border
-              %strong №4
-            %td.text-left.bottom_border.right_border{colspan:2}=@teams[3].team.name
-            %td.no_border
-            %td.text-left.bottom_border.right_border 1 матч #{@results_first_place.present?&&@results_first_place[0].present?&&@results_first_place[0].timestamp.present? ? '('+@results_first_place[0].timestamp.strftime('%d.%m.%Y')+')' : ''}
-            %td.text-center.bottom_border #{@winner_first_semifinal} - #{@winner_second_semifinal}
-            %td.text-center.bottom_border
-              %strong=@results_first_place.present?&&@results_first_place[0].present? ? @results_first_place[0].result : ''
-            %td.no_border
-            %td.text-right.bottom_border.left_border{colspan:2}=@teams[2].team.name
-            %td.text-right.no_border
-              %strong №3
-          %tr
-            %td.right_border{colspan:2} 
-            %td{colspan:7} 
-            %td.left_border{colspan:2} 
-          %tr
-            %td.right_border{colspan:2} 
-            %td{colspan:7} 
-            %td.left_border{colspan:2} 
-          %tr
-            %td.right_border{colspan:2} 
-            %td.text-center.text-info{colspan:7}
-              %h3 Матч за третье место 
-            %td.left_border{colspan:2} 
-          %tr
-            %td.right_border{colspan:2} 
-            %td.bottom_border{colspan:2} 
-            %td.text-left.bottom_border.right_border=@date_third_place 
-            %td.text-center.bottom_border #{@lost_first_semifinal}-#{@lost_second_semifinal}
-            %td.text-center.bottom_border
-              %strong=@results_third_place
-            %td.bottom_border{colspan:2} 
-            %td.left_border{colspan:2} 
-         
-         
 :css
   tr.top-line>td, .no_border{border: none !important;}
   .bottom_border{border-bottom: 1px solid; border-top: none !important;}

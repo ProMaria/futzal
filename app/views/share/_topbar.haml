@@ -22,7 +22,7 @@
         =link_to referee_path do
           %i.fa.fa-id-badge
           Судьи
-      -if League.count>0&&Team.count>0
+      -if League.count>0&&Team.where(league_id: League.ids).count>0
         %li.dropdown{class: (request.path.match('team')&&!request.path.match('table')) ? 'active':''}
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             %i.fa.fa-futbol-o
@@ -33,8 +33,8 @@
               %li
                 %a{:href => team_index_path(league_id: l.id)}=l.name
 
-      -if League.count>0&&Team.count>0
-        %li.dropdown{class: request.path.match('table') ? 'active':''}
+      -if League.count>0&&Team.where(league_id: League.ids).count>0
+        %li.dropdown{class: request.path.match('table')&&params[:old].blank? ? 'active':''}
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             %i.fa.fa-table
             Таблицы
@@ -45,18 +45,32 @@
                 %a{:href => team_position_table_path(l.id)}=l.name
 
 
+      -history_seasons = Season.unscoped.where(current: false)
       %li{class: request.path==items_path ? 'active':''}
         =link_to items_path do
           %i.fa.fa-file
           Новости
-      %li{class: request.path==contacts_path ? 'active':''}
-        =link_to contacts_path do
-          %i.fa.fa-envelope
-          Контакты
-      %li{class: request.path==photo_index_path ? 'active':''}
-        =link_to photo_index_path do
-          %i.fa.fa-photo
-          Фотографии
+          
+          
+      -if history_seasons.present? && League.unscoped.where(season_id: history_seasons.pluck(:id)).present?
+        %li.dropdown{class: params[:old].present? ? 'active':''}
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.fa.fa-table
+            Архив игр
+            %span.caret
+          %ul.dropdown-menu
+            -history_seasons.all.each do |h|
+              -League.unscoped.where(season_id: h.id).each do |l|
+                %li
+                  %a{:href => team_position_table_path(id: l.id, old: true)}
+                    =h.name
+                    =l.name
+
+      -if Photo.all.count>0   
+        %li{class: request.path==photo_index_path ? 'active':''}
+          =link_to photo_index_path do
+            %i.fa.fa-photo
+            Фотографии
       %li{class: request.path==contacts_path ? 'active':''}
         %a{:href => "https://www.youtube.com/channel/UC8vcDQ7ZAhLs-T8KEMixMSw", target: :blank, title: 'Переход на наш канал в YouTube'} 
           %i.fa.fa-youtube-play

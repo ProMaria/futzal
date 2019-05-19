@@ -21,6 +21,7 @@ ru:
       player: игрок
       table_result: положение команд
       photo: фотографии
+      season: сезон
       
     attributes:
       item:
@@ -32,6 +33,7 @@ ru:
         created_at: дата и время создания записи
       league:
         name: Название лиги
+        season: Название сезона
         created_at: дата и время создания записи
         updated_at: дата и время обновления записи
         teams: команды в этой лиге
@@ -64,10 +66,15 @@ ru:
         active_admin: является администратором
       tour:
         name: название тура
+        season: сезон
+      season:
+        name: название сезона
+        current: признак текущего сезона
       goal_leader:
         fio: ФИО
         team: команда
         goal: голы
+        season: сезон
       contact:
         body: контактная информация
       amplua:

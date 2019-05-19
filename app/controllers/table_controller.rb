@@ -1,7 +1,9 @@
 class TableController < ApplicationController
     before_action :set_initial
     def team_position       
-        @table_results = TableResult.where(league_id: params[:id]).order(:place)
+        @table_results = TableResult.where(league_id: params[:id]).order(:place) if params[:old].blank?
+        
+        @table_results = TableResult.unscoped.where(league_id: params[:id]).order(:place) if params[:old].present?
         @table_final = Schedule.joins(:tour).where("tours.name ~ 'финал'") if params[:id]=='1' 
         if @table_final.present?
             #Первый полуфинал
@@ -54,6 +56,7 @@ class TableController < ApplicationController
                 results_first_place = Schedule.joins(:tour).where("tours.name ~ 'Финал'").where('schedules.home_team_id =? and schedules.guest_team_id =? ', Team.find_by_name(@winner_first_semifinal).id, Team.find_by_name(@winner_second_semifinal).id )            
                 @results_first_place=results_first_place.order(:timestamp)
             end
+        
 
                 
         end
@@ -63,17 +66,34 @@ class TableController < ApplicationController
         @teams = TableResult.where(league_id: params[:id]).order(:place).pluck(:team_id)      
     end
     def goal_leader        
-        @leaders = GoalLeader.joins(:team).where('teams.league_id=?', params[:id]).order('goal_leaders.goal desc')
+        if params[:old].blank?
+            @leaders = GoalLeader.joins(:team).where('teams.league_id=?', params[:id]).order('goal_leaders.goal desc') 
+        else
+            team=Team.unscoped.where(league_id: params[:id]).ids
+            @leaders = GoalLeader.unscoped.where(team_id: team).order('goal_leaders.goal desc') 
+        end
     end
     
     def summary
-        @teams = League.find(params[:id]).teams.pluck(:id)
-        summary = Schedule.finished.where(guest_team_id: @teams)
-        @tours = Tour.where(id: summary.pluck(:tour_id).uniq).order(created_at: :desc)
+        if params[:old].present?
+            @teams = League.unscoped.find(params[:id]).teams.pluck(:id)
+            summary = Schedule.unscoped.finished.where(guest_team_id: @teams)
+            @tours = Tour.unscoped.where(id: summary.pluck(:tour_id).uniq).order(created_at: :desc)
+        else
+            @teams = League.find(params[:id]).teams.pluck(:id)
+            summary = Schedule.finished.where(guest_team_id: @teams)
+            @tours = Tour.where(id: summary.pluck(:tour_id).uniq).order(created_at: :desc)
+        
+        end
     end
    private
     def set_initial
-      @league_name = League.find(params[:id]).name
-      @league = League.order(id: :desc)
+        if params[:old].present?
+          @league_name = League.unscoped.find(params[:id]).name
+          @league = League.unscoped.order(id: :desc)
+      else
+        @league_name = League.find(params[:id]).name
+          @league = League.order(id: :desc)
+      end
     end
 end

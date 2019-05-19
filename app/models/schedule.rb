@@ -7,6 +7,6 @@ class Schedule < ApplicationRecord
     
     scope :finished, ->{where("result!=''").order(timestamp: :desc)}
     scope :start, ->{where("result=''").order(timestamp: :desc)}
-    default_scope {order(:timestamp)}
+    default_scope {where(tour_id: Tour.all.ids).order(:timestamp)}
 
 end

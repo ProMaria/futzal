@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_16_190326) do
+ActiveRecord::Schema.define(version: 2019_05_19_184748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_01_16_190326) do
     t.bigint "team_id"
     t.string "fio"
     t.integer "goal"
+    t.integer "season_id"
     t.index ["team_id"], name: "index_goal_leaders_on_team_id"
   end
 
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_01_16_190326) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "season_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -104,6 +106,13 @@ ActiveRecord::Schema.define(version: 2019_01_16_190326) do
     t.integer "tour_id"
   end
 
+  create_table "seasons", force: :cascade do |t|
+    t.string "name"
+    t.boolean "current", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "table_results", force: :cascade do |t|
     t.bigint "league_id"
     t.bigint "team_id"
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 2019_01_16_190326) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "season_id"
   end
 
   create_table "users", force: :cascade do |t|

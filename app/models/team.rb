@@ -4,6 +4,7 @@ class Team < ApplicationRecord
     has_many :goal_leaders, dependent: :destroy
     has_many :players, dependent: :destroy
     has_many :table_result, dependent: :destroy
+    default_scope {where(league_id: League.ids)}
     #has_many :home_teams, :class_name => "Team", :foreign_key => "home_team_id"
     #has_many :guest_teams, :class_name => "Team", :foreign_key => "guest_team_id"
     

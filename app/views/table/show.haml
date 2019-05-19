@@ -3,7 +3,10 @@
 .panel.panel-success
   =render 'panel_heading'
   .panel-body 
-    %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+    -if params[:old].blank?
+      %h3 #{league_name}. Положение команд на #{Time.now.strftime('%d.%m.%Y')}
+    -else
+      %h3 #{@league_name}. Положение команд сезона #{League.unscoped.find(params[:id]).season.name}
     -if current_user.present? && current_user.active_admin  
       =link_to 'Сформировать положение', futadmin_generate_path(league_id: params[:id]), class: 'btn btn-sm btn-danger'
     %table.table.table-hover.table-condensed
