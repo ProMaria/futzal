@@ -1,5 +1,5 @@
 
--league_name = League.find(params[:league_id]).name
+-league_name = League.unscoped.find(params[:league_id]).name
 - title 'Команды '+"#{league_name}"
 - meta_tag :description, 'Команды, принимающие участие в соревнованиях по футзалу Карагандинской области 2018-2019'
 - meta_tag :keywords, 'Команды, футзал, Караганда, Карагандинская область, 2018 год, расписание игр футзал, '+"#{league_name}"

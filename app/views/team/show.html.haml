@@ -1,5 +1,5 @@
-- title "#{@team.name}. #{@team.league.name}"
-- meta_tag :description, "#{@team.name}. #{@team.league.name}. Участник соревнований по футзалу Карагандинской области 2018-2019"
+- title "#{@team.name}. #{@league_name}"
+- meta_tag :description, "#{@team.name}. #{@league_name}. Участник соревнований по футзалу Карагандинской области 2018-2019"
 - meta_tag :keywords, "#{@team.name} , Футзал, Караганда, Карагандинская область, 2018 год, "+"#{@league_name}"
 
 .panel.panel-success
@@ -8,7 +8,7 @@
       .col-md-12
         .row
           .col-md-9
-            #{@team.name}. #{@team.league.name}
+            #{@team.name}. #{@league_name}
           
           .col-md-3
             =render 'share/social_share'

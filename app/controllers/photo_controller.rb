@@ -32,6 +32,7 @@ class PhotoController < ApplicationController
     end
 
     def show
+    	
     	@photos = Tour.unscoped.find(params[:id]).photos
     	@tour_name = Tour.unscoped.find(params[:id]).name
     end

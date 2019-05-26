@@ -28,10 +28,13 @@
             %i.fa.fa-futbol-o
             Команды
             %span.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu            
             -League.all.each do |l|
               %li
-                %a{:href => team_index_path(league_id: l.id)}=l.name
+                %a{:href => team_index_path(league_id: l.id)} Текущий сезон. #{l.name}
+            -League.unscoped.where(season_id: Season.unscoped.old.pluck(:id)).each do |l|
+              %li
+                %a{:href => team_index_path(league_id: l.id)} Архив. Сезон #{l.season.name}. #{l.name}
 
       -if League.count>0&&Team.where(league_id: League.ids).count>0
         %li.dropdown{class: request.path.match('table')&&params[:old].blank? ? 'active':''}
