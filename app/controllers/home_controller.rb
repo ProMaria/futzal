@@ -17,7 +17,8 @@ class HomeController < ApplicationController
       @result_final = Schedule.where(tour_id: Tour.final_tours)
       @result_final_third = Schedule.where(tour_id: Tour.third_tours)
       @history_seasons = Season.unscoped.where(current: false)
-      
+      @history_teams = Team.where(league_id: League.unscoped.joins(:season).where('seasons.current is false').ids)
+      @history_photos = Photo.unscoped.where(tour_id: Tour.unscoped.joins(:season).where('seasons.current is false').ids)
   end
   def contact
       @text = Contact.all

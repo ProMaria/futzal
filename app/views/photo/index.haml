@@ -6,6 +6,9 @@
   .panel-heading
     .row
       .col-md-9
+        -if params[:old].present?
+          Сезон #{Season.unscoped.find(params[:season_id]).name} /
+          
         Фото /
         %span#tourName
           =@tour_name
@@ -17,6 +20,6 @@
     .pull-right  
       Показать фото за 
       =select_tag :tour_id, options_from_collection_for_select(@tours, "id", "name", @tour_id), selected: @tour_id 
-    %br
+    %br    
     #list  
       =render 'list'

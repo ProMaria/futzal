@@ -50,10 +50,25 @@
         =link_to items_path do
           %i.fa.fa-file
           Новости
+      
+      -if history_seasons.present?  || Photo.all.count>0 
+        %li.dropdown{class: request.path.match('phot').present? ? 'active':''}
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.fa.fa-table
+            Фото
+            %span.caret
+          %ul.dropdown-menu
+            -if  Photo.all.count>0  
+              %li
+                %a{:href => photo_index_path} Текущий сезон
+            -history_seasons.all.each do |h|
+              %li
+                %a{:href => photo_index_path(old: true, season_id: h.id)}
+                  Архив #{h.name}
           
           
       -if history_seasons.present? && League.unscoped.where(season_id: history_seasons.pluck(:id)).present?
-        %li.dropdown{class: params[:old].present? ? 'active':''}
+        %li.dropdown{class: params[:old].present?&&request.path.match('team_position').present? ? 'active':''}
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             %i.fa.fa-table
             Архив игр
@@ -66,11 +81,7 @@
                     =h.name
                     =l.name
 
-      -if Photo.all.count>0   
-        %li{class: request.path==photo_index_path ? 'active':''}
-          =link_to photo_index_path do
-            %i.fa.fa-photo
-            Фотографии
+
       %li{class: request.path==contacts_path ? 'active':''}
         %a{:href => "https://www.youtube.com/channel/UC8vcDQ7ZAhLs-T8KEMixMSw", target: :blank, title: 'Переход на наш канал в YouTube'} 
           %i.fa.fa-youtube-play
