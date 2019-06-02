@@ -36,10 +36,12 @@
                 -else
                   Дата не указана
               %td.text-center
-                =Team.unscoped.find(s.home_team_id).name
+                -if Team.unscoped.where(id: s.home_team_id).present?
+                  =Team.unscoped.find(s.home_team_id).name
 
               %td.text-center
-                =Team.unscoped.find(s.guest_team_id).name
+                -if Team.unscoped.where(id: s.guest_team_id).present?  
+                  =Team.unscoped.find(s.guest_team_id).name
               %td.text-center.info=s.result
 
               %td
