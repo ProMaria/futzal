@@ -24,7 +24,7 @@ class Team < ApplicationRecord
     
     validates_attachment :image,
                      content_type: { content_type: /\Aimage\/.*\z/ },
-                     size: { less_than: 6.megabyte }
+                     size: { less_than: 7.megabyte }
     
     def count_games
         at_home_schedule = Schedule.finished.where(home_team_id: self.id)
