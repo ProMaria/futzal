@@ -5,8 +5,12 @@
     -else
       Не указано
 
-  %td=link_to result.home_team.name, team_path(result.home_team.id), target: :blank
+  %td
+    -if result.home_team.present?
+      =link_to result.home_team.name, team_path(result.home_team.id), target: :blank
   
-  %td=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
+  %td
+    -if result.guest_team.present?
+      =link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
   
   %td=result.result

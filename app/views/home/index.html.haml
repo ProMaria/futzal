@@ -65,9 +65,13 @@
                   =l schedule.timestamp, format: :short
                 -else
                   Не указано
-              %td=link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank
+              %td
+                -if schedule.home_team.present?
+                  =link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank
               
-              %td=link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
+              %td
+                -if schedule.guest_team.present?
+                  =link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
     
 -if @result_final.present? || @result_semifinal.present?
   .panel.panel-success
