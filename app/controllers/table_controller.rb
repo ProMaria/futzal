@@ -4,11 +4,11 @@ class TableController < ApplicationController
         @table_results = TableResult.where(league_id: params[:id]).order(:place) if params[:old].blank?
         
         @table_results = TableResult.unscoped.where(league_id: params[:id]).order(:place) if params[:old].present?
-        @table_qfinal = Schedule.joins(:tour).where("tours.name ~ '1/4'").order(:id) if params[:id]=='3' 
-        @table_sfinal = Schedule.joins(:tour).where("tours.name ~ '1/2'") if params[:id]=='3' 
+        @table_qfinal = Schedule.unscoped.where(id: Schedule.joins(:tour).where("tours.name ~ '1/4'").pluck(:id)).order(id: :desc) if params[:id]=='3' 
+        @table_sfinal = Schedule.unscoped.where(id: Schedule.joins(:tour).where("tours.name ~ '1/2'").pluck(:id)).order(id: :desc) if params[:id]=='3' 
         
         @table_third = Schedule.joins(:tour).where("tours.name ~ '3 место'") if params[:id]=='3' 
-        @table_final = Schedule.joins(:tour).where("lower(tours.name)= 'финал'") if params[:id]=='3' 
+        @table_final = Schedule.unscoped.where(id: Schedule.joins(:tour).where("lower(tours.name)= 'финал'").pluck(:id)).order(id: :desc) if params[:id]=='3' 
         # if @table_final.present?
         #     #Первый полуфинал
         #     @teams=TableResult.where(league_id: 1).order(:place).first(4)
