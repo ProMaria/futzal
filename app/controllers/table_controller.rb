@@ -4,7 +4,7 @@ class TableController < ApplicationController
         @table_results = TableResult.where(league_id: params[:id]).order(:place) if params[:old].blank?
         
         @table_results = TableResult.unscoped.where(league_id: params[:id]).order(:place) if params[:old].present?
-        @table_qfinal = Schedule.joins(:tour).where("tours.name ~ '1/4'").order(:created_at) if params[:id]=='3' 
+        @table_qfinal = Schedule.joins(:tour).where("tours.name ~ '1/4'").order(:id) if params[:id]=='3' 
         @table_sfinal = Schedule.joins(:tour).where("tours.name ~ '1/2'") if params[:id]=='3' 
         
         @table_third = Schedule.joins(:tour).where("tours.name ~ '3 место'") if params[:id]=='3' 

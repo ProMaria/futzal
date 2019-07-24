@@ -167,7 +167,7 @@
             %tr
               %td.right_border.text-center
 
-                -if @table_qfinal[1].result.present?
+                -if @table_qfinal[1].present?&&@table_qfinal[1].result.present?
                   %strong=@table_qfinal[1].result
                 
               %td.bottom_border.right_border
