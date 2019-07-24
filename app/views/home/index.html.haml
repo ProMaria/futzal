@@ -73,13 +73,18 @@
                 -if schedule.guest_team.present?
                   =link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
     
--if @result_final.present? || @result_semifinal.present?
+                =@table_qfinal.present?
+                =@result_final.present? 
+                =@result_sfinal.present?
+                = @result_qfinal.present?
+-if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
   .panel.panel-success
     .panel-heading
       Финальные игры. Высшая лига.
+      
     .panel-body
-      -if @result_semifinal.present?  
-        %h3.text-center Полуфинал
+      -if @result_qfinal.present?  
+        %h3.text-center 1/4 финала
         %ul.list-group
           %table.table.table-hover.table-condensed
             %tr.active
@@ -87,9 +92,20 @@
               %td Команда
               %td Команда
               %td Счет
-            -@result_semifinal.each do |result|
+            -@result_qfinal.each do |result|
               =render 'list', result: result
-      -if @result_final_third.present?  
+      -if @result_sfinal.present?  
+        %h3.text-center 1/2 финала
+        %ul.list-group
+          %table.table.table-hover.table-condensed
+            %tr.active
+              %td Дата и время
+              %td Команда
+              %td Команда
+              %td Счет
+            -@result_sfinal.each do |result|
+              =render 'list', result: result
+      -if @result_third.present?  
         %h3.text-center Матч за 3 место
         %ul.list-group
           %table.table.table-hover.table-condensed
@@ -98,7 +114,7 @@
               %td Команда
               %td Команда
               %td Счет
-            -@result_final_third.each do |result|
+            -@result_third.each do |result|
               =render 'list', result: result
       -if @result_final.present?  
         %h3.text-center Финал

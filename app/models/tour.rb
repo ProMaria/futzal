@@ -11,7 +11,7 @@ class Tour < ApplicationRecord
     	Tour.where("tours.name !~*'финал'")
     end
     def self.final_tours
-    	Tour.where("tours.name ~*'финал' and tours.name !~*'полу'").pluck(:id)
+    	Tour.where("tours.name ~*'финал' and tours.name !~*'1/'").pluck(:id)
     end
 
     def self.third_tours
