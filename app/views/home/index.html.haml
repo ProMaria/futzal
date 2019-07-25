@@ -73,10 +73,7 @@
                 -if schedule.guest_team.present?
                   =link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
     
-                =@table_qfinal.present?
-                =@result_final.present? 
-                =@result_sfinal.present?
-                = @result_qfinal.present?
+                
 -if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
   .panel.panel-success
     .panel-heading

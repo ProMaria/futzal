@@ -9,7 +9,16 @@ class HomeController < ApplicationController
       # && !(@result_semifinal.present? && @result_semifinal.first.result.present?)
 
       @tour_future = Tour.current_tours.order(:id).last
-      @schedules_future = Schedule.where(tour_id: @tour_future.id).where('result is null')  if @tour_future.present? 
+      
+      @schedules_future = Schedule.where(tour_id: @tour_future.id) if @tour_future.present? && Schedule.where(tour_id: @tour_future.id).where("result !=''").blank?
+
+      if @tour_future.present? && Schedule.where(tour_id: @tour_future.id).where("result !=''").present?
+        @results_current = Schedule.where(tour_id: @tour_future.id) 
+        @tour_current = Tour.find(@tour_future.id)
+        @schedules_future = []
+        @tour_future = []
+      end
+      
       # && @tour_future.name.match('тур')
 
       @league = League.all

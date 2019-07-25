@@ -102,15 +102,8 @@
                   =@table_qfinal[0].guest_team.name
 
               %td.right_border
-              %td.bottom_border.right_border{colspan:2}
-                -if @table_final[2].present?
-                  =@table_final[2].home_team.name
-                  \-
-                  =@table_final[2].guest_team.name
-                  -if @table_final[2].result.present?
-                    %strong=@table_final[2].result
-                -else
-                  3 игра
+              %td.right_border{colspan:2}
+                
 
               %td.right_border
               %td.text-left.bottom_border
@@ -127,14 +120,13 @@
                 -if @table_sfinal[0].present?&&@table_sfinal[0].result.present?
                   %strong=@table_sfinal[0].result
               %td.bottom_border.right_border{colspan:2}
-                -if @table_final[1].present?
-                  =@table_final[1].home_team.name
+                -if @table_final[0].present?
+                  =@table_final[0].home_team.name
                   \-
-                  =@table_final[1].guest_team.name
-                  -if @table_final[1].result.present?
-                    %strong=@table_final[1].result
-                -else
-                  2 игра
+                  =@table_final[0].guest_team.name
+                  -if @table_final[0].result.present?
+                    %strong=@table_final[0].result
+
               %td.no_border
                 
                 -if @table_sfinal[1].present?&&@table_sfinal[1].result.present?
@@ -148,15 +140,8 @@
                   -if @table_qfinal[1].result.present?
                     =@table_qfinal[1].result
               %td.right_border
-              %td.bottom_border.right_border{colspan:2}
-                -if @table_final[0].present?
-                  =@table_final[0].home_team.name
-                  \-
-                  =@table_final[0].guest_team.name
-                  -if @table_final[0].result.present?
-                    %strong=@table_final[0].result
-                -else
-                  1 игра
+              %td.right_border{colspan:2}
+                
               %td.no_border
               %td.text-left.bottom_border
                 -if @table_qfinal[3].present?
