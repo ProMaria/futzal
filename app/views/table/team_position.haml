@@ -137,8 +137,6 @@
               %td.text-left.bottom_border
                 -if @table_qfinal[1].present?
                   =@table_qfinal[1].home_team.name
-                  -if @table_qfinal[1].result.present?
-                    =@table_qfinal[1].result
               %td.right_border
               %td.right_border{colspan:2}
                 
@@ -165,7 +163,7 @@
                   =@table_sfinal[1].guest_team.name  
                 -else
                   победитель пары                  
-              %td.no_border
+              %td.no_border.text-center
                 
                 -if @table_qfinal[3].present?&&@table_qfinal[3].result.present?
                   %strong=@table_qfinal[3].result
