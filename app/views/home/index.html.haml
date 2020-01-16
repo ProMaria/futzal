@@ -26,54 +26,28 @@
                 %p.pull-right
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
-                  
     
--if @results_current.present?
-  .panel.panel-success
-    .panel-heading
-      Расписание и результаты текущего тура
-    .panel-body
-    
-      %h3.text-center=@tour_current.name
-      %ul.list-group
-        %table.table.table-hover.table-condensed
-          %tr.active
-            %td Дата и время
-            %td Хозяин
-            %td Гость
-            %td Счет
-          -@results_current.each do |result|
-            =render 'list', result: result
-
--if @schedules_future.present?
-  .panel.panel-success
-    .panel-heading
-      Расписание следующего тура
-    .panel-body
-    
-      %h3.text-center=@tour_future.name
-      %ul.list-group
-        %table.table.table-hover.table-condensed
-          %tr.active
-            %td Дата и время
-            %td Хозяин
-            %td Гость
-          -@schedules_future.each do |schedule|
-            %tr
-              %td
-                -if schedule.timestamp.present?
-                  =l schedule.timestamp, format: :short
-                -else
-                  Не указано
-              %td
-                -if schedule.home_team.present?
-                  =link_to schedule.home_team.name, team_path(schedule.home_team.id), target: :blank
+-if @next_tours.present?
+  -@next_tours.each do |t|
+    -schedule = Schedule.where(tour_id: t.id)
+    -if schedule.present? 
+      -results = schedule.pluck(:result).uniq
+      .panel.panel-success
+        .panel-heading
+          %h3.text-center=t.name
+        .panel-body
+          %ul.list-group
+            %table.table.table-hover.table-condensed
+              %tr.active
+                %td Дата и время                
+                %td Хозяин
+                %td Гость
+                -unless results.count==1 && results[0].blank?  
+                  %td Счет
+              -schedule.each do |result|
+                =render 'list', result: result
               
-              %td
-                -if schedule.guest_team.present?
-                  =link_to schedule.guest_team.name, team_path(schedule.guest_team.id), target: :blank
-    
-                
+
 -if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
   .panel.panel-success
     .panel-heading

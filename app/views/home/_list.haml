@@ -13,4 +13,5 @@
     -if result.guest_team.present?
       =link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
   
-  %td=result.result
+  -if result.result.present?  
+    %td=result.result

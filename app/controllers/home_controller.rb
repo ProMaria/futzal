@@ -9,6 +9,8 @@ class HomeController < ApplicationController
       # && !(@result_semifinal.present? && @result_semifinal.first.result.present?)
 
       @tour_future = Tour.current_tours.order(:id).last
+
+      @next_tours = Tour.current_tours.order(:id).last(3)
       
       @schedules_future = Schedule.where(tour_id: @tour_future.id) if @tour_future.present? && Schedule.where(tour_id: @tour_future.id).where("result !=''").blank?
 
