@@ -27,7 +27,7 @@
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
     
--if @next_tours.present?
+-if @next_tours.present? & !(@result_final.present? || @result_sfinal.present?|| @result_qfinal.present?)
   -@next_tours.each do |t|
     -schedule = Schedule.where(tour_id: t.id)
     -if schedule.present? 
@@ -51,7 +51,7 @@
 -if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
   .panel.panel-success
     .panel-heading
-      Финальные игры. Высшая лига.
+      Финальные игры.
       
     .panel-body
       -if @result_qfinal.present?  
