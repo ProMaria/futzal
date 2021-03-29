@@ -48,6 +48,7 @@ ru:
         name: Название
         image: фото
         league: лига
+        sponsor: спонсор
         created_at: дата и время создания записи
         updated_at: дата и время обновления записи
       schedule:

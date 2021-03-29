@@ -57,17 +57,20 @@ RailsAdmin.config do |config|
         field :name
         field :image
         field :league
+        field :sponsor
        end
         create do
             field :name
         field :image
         field :league
+        field :sponsor
         end
 
         edit do
             field :name
         field :image
         field :league
+        field :sponsor
         end        
         
     
