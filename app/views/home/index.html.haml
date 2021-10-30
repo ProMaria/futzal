@@ -37,13 +37,8 @@
           %h3.text-center=t.name
         .panel-body
           %ul.list-group
-            %table.table.table-hover.table-condensed
-              %tr.active
-                %td Дата и время                
-                %td Хозяин
-                %td Гость
-                -unless results.count==1 && results[0].blank?  
-                  %td Счет
+            %table.table.table-hover.table-condensed.table-striped.table-sm
+
               -schedule.each do |result|
                 =render 'list', result: result
               

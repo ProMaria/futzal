@@ -1,6 +1,6 @@
 - title 'Положение команд'
-- meta_tag :description, 'Положение команд соревнований по футзалу Карагандинской области 2018-2019'
-- meta_tag :keywords, 'Положение команд , Футзал, Караганда, Карагандинская область, 2018 год, '+"#{@league_name}"
+- meta_tag :description, 'Положение команд соревнований по футзалу Карагандинской области 2018-2021'
+- meta_tag :keywords, 'Положение команд , Футзал, Караганда, Карагандинская область, 2021 год, '+"#{@league_name}"
 -counter = params[:id].to_i==1 ? 4 :3
 
 .panel.panel-success
@@ -16,8 +16,8 @@
       -else
         %h3 #{@league_name}. Положение команд сезона #{League.unscoped.find(params[:id]).season.name}
       =render 'nav'
-      %table.table.table-hover.table-condensed
-        %tr.active
+      %table.table.table-condensed.table-bordered
+        %tr
           %td.text-center место
           %td.text-center команда
           %td.text-center И
@@ -31,7 +31,7 @@
 
 
         -@table_results.each do |team|
-          %tr{class: counter >0 ? 'leader_team' :''}
+          %tr{class: (team.score !=0 and counter >0) ? 'leader_team' :''}
             
             %td.text-center=team.place
             %td.text-center
