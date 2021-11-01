@@ -9,18 +9,26 @@
   %td.text-left
     -if result.home_team.present?
       =link_to result.home_team.name, team_path(result.home_team.id), target: :blank
-    -if result.guest_team.present?
+
+
       %br
-      %br=link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
+      %br
+        =link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
   %td  
     -if result.result.present?
       
       %strong
         .text-center
           =result.result.split(':')[0]
-          %br
+          -if result.guest_team.present?
+            - length = result.home_team.name.length
+            %br
+            -if length >24
+              %br
+            -if length >33
+              %br 
           
-          %br=result.result.split(':')[1]
+            %br=result.result.split(':')[1]
 
 
 
