@@ -226,6 +226,10 @@ body {
   .photo figcaption {
     margin-top: 16px;
   }
+  #content2::before{
+    content: "\a";
+    white-space: pre;
+}
 
 }
 
