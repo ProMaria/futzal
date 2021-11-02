@@ -85,10 +85,16 @@
                     =l.name
 
 
-      %li{class: request.path==contacts_path ? 'active':''}
-        %a{:href => "https://www.youtube.com/playlist?list=PLONkxaSIBkROaooJONYtNokTOac9wu87Q", target: :blank, title: 'Переход на наш канал в YouTube'} 
+      %li.dropdown{class: request.path==contacts_path ? 'active':''}
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
           %i.fa.fa-youtube-play
           Просмотр матчей
+          %span.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "https://www.youtube.com/playlist?list=PLONkxaSIBkRN0p6HBtNnDSinYAzjDgTLB", target: :blank} КФК
+          %li 
+            %a{:href => "https://www.youtube.com/playlist?list=PLONkxaSIBkROaooJONYtNokTOac9wu87Q", target: :blank} Дети
 
     %ul.nav.navbar-nav.navbar-right
       %li
