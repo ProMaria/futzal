@@ -21,7 +21,7 @@
 
                 %h3.text-center=link_to item.title, items_path(item), target: :blank
 
-                %p=item.body
+                %p=item.body.html_safe
 
                 %p.pull-right
                   %i.fa.fa-calendar
