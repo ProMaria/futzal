@@ -25,7 +25,7 @@
             %br
             -if length >24
               #content2
-            -if length >33
+            -if result.home_team.id == 121 || length > 34
               #content2
           
             %br=result.result.split(':')[1]
