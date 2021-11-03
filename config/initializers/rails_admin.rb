@@ -127,7 +127,6 @@ RailsAdmin.config do |config|
         field :title        
         field :body
         field :image
-  end
     
   end  # other
   config.model Schedule do
