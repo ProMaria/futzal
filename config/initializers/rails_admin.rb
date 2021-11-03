@@ -125,7 +125,7 @@ RailsAdmin.config do |config|
   end
   config.model Item do
         field :title        
-        field :body
+        field :body, :ck_editor
         field :image
     
   end  # other
