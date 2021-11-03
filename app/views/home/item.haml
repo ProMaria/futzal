@@ -20,7 +20,7 @@
                 .text-center= image_tag item.image.url(:small) if item.image.present?
               .col-md-9
                 %h3.text-center=link_to item.title, items_path(item), target: :blank
-                %p=item.body
+                %p=item.body.html_safe
                 .pull-right
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
