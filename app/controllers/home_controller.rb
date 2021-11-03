@@ -1,3 +1,4 @@
+require 'date'
 class HomeController < ApplicationController
   def index
       @items =Item.last(3)
@@ -35,6 +36,8 @@ class HomeController < ApplicationController
       @result_sfinal = Schedule.joins(:tour).where("tours.name ~ '1/2'")
       @result_third = Schedule.joins(:tour).where("tours.name ~ '3 место'")
       @result_final = Schedule.joins(:tour).where("lower(tours.name) = 'финал'") 
+
+      @schedules = Schedule.where("timestamp between ? AND ? or timestamp is null", Date.today - 7, Date.today + 7)
 
   end
   def contact

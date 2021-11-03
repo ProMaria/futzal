@@ -27,21 +27,31 @@
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
     
--if @next_tours.present? & !(@result_final.present? || @result_sfinal.present?|| @result_qfinal.present?)
-  -@next_tours.each do |t|
-    -schedule = Schedule.where(tour_id: t.id)
-    -if schedule.present? 
-      -results = schedule.pluck(:result).uniq
-      .panel.panel-success
-        .panel-heading
-          %h3.text-center=t.name
-        .panel-body
-          %ul.list-group
-            %table.table.table-hover.table-condensed.table-striped.table-sm
+/ -if @next_tours.present? & !(@result_final.present? || @result_sfinal.present?|| @result_qfinal.present?)
+/   -@next_tours.each do |t|
+/     -schedule = Schedule.where(tour_id: t.id)
+/     -if schedule.present? 
+/       -results = schedule.pluck(:result).uniq
+/       .panel.panel-success
+/         .panel-heading
+/           %h3.text-center=t.name
+/         .panel-body
+/           %ul.list-group
+/             %table.table.table-hover.table-condensed.table-striped.table-sm
 
-              -schedule.each do |result|
-                =render 'list', result: result
+/               -schedule.each do |result|
+/                 =render 'list', result: result
               
+- if @schedules.present?
+  .panel.panel-success
+    .panel-heading
+      Текущие игры
+    .panel-body
+      %ul.list-group
+        %table.table.table-hover.table-condensed.table-striped.table-sm
+
+          -@schedules.each do |result|
+            =render 'list', result: result
 
 -if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
   .panel.panel-success
