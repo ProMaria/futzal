@@ -2,43 +2,26 @@ require 'date'
 class HomeController < ApplicationController
   def index
       @items =Item.last(3)
-      # @result_semifinal = Schedule.where(tour_id: Tour.semifinal_tours)
-
-      @tour_current = Tour.current_tours.order(:id).last(2)[0]
-
-      @results_current = Schedule.where(tour_id: @tour_current.id).where('result is not null') if @tour_current.present? 
-      # && !(@result_semifinal.present? && @result_semifinal.first.result.present?)
-
-      @tour_future = Tour.current_tours.order(:id).last
-
-      @next_tours = Tour.current_tours.order(:id).last(3)
+      # leagues = League.all()
+      # leaders = GoalLeader.select("teams.league_id as league_id, max(goal_leaders.goal) as max_goal").joins(:team).where("teams.league_id in (?)", leagues.pluck(:id)).group("teams.league_id")
       
-      @schedules_future = Schedule.where(tour_id: @tour_future.id) if @tour_future.present? && Schedule.where(tour_id: @tour_future.id).where("result !=''").blank?
+      # max_goals = {}
+      # for res in leaders
+      #   max_goals[res.league_id] = res.max_goal
+      # end
+      # puts(max_goals)
+      # lead = GoalLeader.select("leagues.name as league, leagues.id as league_id, fio, goal").joins('join teams on teams.id = goal_leaders.team_id join leagues on leagues.id = teams.league_id').where("goal in (?) and teams.league_id in (?)", max_goals.values, max_goals.keys).order("league")
+      # @all_leaders = []
+      # for res in lead
+      #   if max_goals[res.league_id] == res.goal          
+      #     @all_leaders << res
+      #   end
+      # end
 
-      if @tour_future.present? && Schedule.where(tour_id: @tour_future.id).where("result !=''").present?
-        @results_current = Schedule.where(tour_id: @tour_future.id) 
-        @tour_current = Tour.find(@tour_future.id)
-        @schedules_future = []
-        @tour_future = []
-      end
-      
-      # && @tour_future.name.match('тур')
-
-      @league = League.all
-
-      # @result_final = Schedule.where(tour_id: Tour.final_tours)
-      # @result_final_third = Schedule.where(tour_id: Tour.third_tours)
-      @history_seasons = Season.unscoped.where(current: false)
-      @history_teams = Team.where(league_id: League.unscoped.joins(:season).where('seasons.current is false').ids)
-      @history_photos = Photo.unscoped.where(tour_id: Tour.unscoped.joins(:season).where('seasons.current is false').ids)
-  
-      @result_qfinal = Schedule.joins(:tour).where("tours.name ~ '1/4'")  
-      @result_sfinal = Schedule.joins(:tour).where("tours.name ~ '1/2'")
-      @result_third = Schedule.joins(:tour).where("tours.name ~ '3 место'")
-      @result_final = Schedule.joins(:tour).where("lower(tours.name) = 'финал'") 
-
-      @schedules = Schedule.where("timestamp between ? AND ? or timestamp is null", Date.today - 7, Date.today + 7)
-
+      @last_games = Schedule.where("timestamp between ? AND ?", Date.today - 7, Date.today)
+      @future_games = Schedule.where("timestamp between ? AND ? or timestamp is null", Date.today+1, Date.today + 7)
+      @current_games = Schedule.where("timestamp between ? AND ?", Date.today, Date.today+1)
+       
   end
   def contact
       @text = Contact.all

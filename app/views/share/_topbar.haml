@@ -49,11 +49,6 @@
 
 
       -history_seasons = Season.unscoped.where(current: false)
-      %li{class: request.path==items_path ? 'active':''}
-        =link_to items_path do
-          %i.fa.fa-file
-          Новости
-      
       -if history_seasons.present?  || Photo.all.count>0 
         %li.dropdown{class: request.path.match('phot').present? ? 'active':''}
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

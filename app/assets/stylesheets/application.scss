@@ -160,7 +160,10 @@ body {
   max-width: 100%; /* устанавливаем ширину элемента */
   padding: 10px; /* добавляем отступы с каждой стороны */
   box-sizing: border-box; /* меняем способ вычисления ширины */
+  margin: auto;
+  vertical-align: middle
 }
+
 .photo_large img {
   display: inline-block;
   max-width: 100%;
@@ -168,6 +171,7 @@ body {
   padding: 5px;
   background-color: #eee;
   box-sizing: border-box;
+  vertical-align: middle
 }
 
 

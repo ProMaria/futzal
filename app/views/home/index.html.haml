@@ -1,6 +1,7 @@
 - title 'Главная'
 - meta_tag :description, 'Расписание следующего тура, итоги прошедшего тура, новости соревнований по футзалу Карагандинской области 2018-2019'
-- meta_tag :keywords, 'Футзал, Караганда, Карагандинская область, 2018 год, расписание игр футзал'
+- meta_tag :keywords, 'Футзал, Караганда, Карагандинская область, 2021-2022 год, расписание игр футзал'
+
 -if @items.present?
   .panel.panel-success
     .panel-heading
@@ -12,7 +13,7 @@
             
             .row
               .col-md-3
-              
+                              
                 .text-center
                   .photo_large
                     = image_tag item.image.url(:small) if item.image.present?
@@ -26,80 +27,12 @@
                 %p.pull-right
                   %i.fa.fa-calendar
                   =l item.updated_at+6.hours, format: :short
-    
-/ -if @next_tours.present? & !(@result_final.present? || @result_sfinal.present?|| @result_qfinal.present?)
-/   -@next_tours.each do |t|
-/     -schedule = Schedule.where(tour_id: t.id)
-/     -if schedule.present? 
-/       -results = schedule.pluck(:result).uniq
-/       .panel.panel-success
-/         .panel-heading
-/           %h3.text-center=t.name
-/         .panel-body
-/           %ul.list-group
-/             %table.table.table-hover.table-condensed.table-striped.table-sm
 
-/               -schedule.each do |result|
-/                 =render 'list', result: result
-              
-- if @schedules.present?
-  .panel.panel-success
-    .panel-heading
-      Текущие игры
-    .panel-body
-      %ul.list-group
-        %table.table.table-hover.table-condensed.table-striped.table-sm
+- if @current_games.present?
+  =render 'games', name: "Игры сегодня", games: @current_games
 
-          -@schedules.each do |result|
-            =render 'list', result: result
+- if @future_games.present?
+  =render 'games', name: "Расписание предстоящих игр", games: @future_games
 
--if @result_final.present? || @result_sfinal.present?|| @result_qfinal.present?
-  .panel.panel-success
-    .panel-heading
-      Финальные игры.
-      
-    .panel-body
-      -if @result_qfinal.present?  
-        %h3.text-center 1/4 финала
-        %ul.list-group
-          %table.table.table-hover.table-condensed
-            %tr.active
-              %td Дата и время
-              %td Команда
-              %td Команда
-              %td Счет
-            -@result_qfinal.each do |result|
-              =render 'list', result: result
-      -if @result_sfinal.present?  
-        %h3.text-center 1/2 финала
-        %ul.list-group
-          %table.table.table-hover.table-condensed
-            %tr.active
-              %td Дата и время
-              %td Команда
-              %td Команда
-              %td Счет
-            -@result_sfinal.each do |result|
-              =render 'list', result: result
-      -if @result_third.present?  
-        %h3.text-center Матч за 3 место
-        %ul.list-group
-          %table.table.table-hover.table-condensed
-            %tr.active
-              %td Дата и время
-              %td Команда
-              %td Команда
-              %td Счет
-            -@result_third.each do |result|
-              =render 'list', result: result
-      -if @result_final.present?  
-        %h3.text-center Финал
-        %ul.list-group
-          %table.table.table-hover.table-condensed
-            %tr.active
-              %td Дата и время
-              %td Команда
-              %td Команда
-              %td Счет
-            -@result_final.each do |result|
-              =render 'list', result: result
+- if @last_games.present?
+  =render 'games', name: "Результаты игр прошедшей недели", games: @last_games

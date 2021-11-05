@@ -1,0 +1,9 @@
+.panel.panel-success
+  .panel-heading
+    =name
+  .panel-body
+    %ul.list-group
+      %table.table.table-hover.table-condensed.table-striped.table-sm
+
+        -games.each do |result|
+          =render 'list', result: result
