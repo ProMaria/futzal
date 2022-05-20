@@ -79,18 +79,11 @@
                     =h.name
                     =l.name
 
-
-      %li.dropdown{class: request.path==contacts_path ? 'active':''}
-        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      %li{class: request.path==contacts_path ? 'active':''}
+        =link_to "https://www.youtube.com/playlist?list=PLONkxaSIBkRMJFpedsJznWtz8f_O6BIFO",target: "_blank" do
           %i.fa.fa-youtube-play
           Просмотр матчей
-          %span.caret
-        %ul.dropdown-menu
-          %li
-            %a{:href => "https://www.youtube.com/playlist?list=PLONkxaSIBkRN0p6HBtNnDSinYAzjDgTLB", target: :blank} КФК
-          %li 
-            %a{:href => "https://www.youtube.com/playlist?list=PLONkxaSIBkROaooJONYtNokTOac9wu87Q", target: :blank} Дети
-
+          
     %ul.nav.navbar-nav.navbar-right
       %li
         %a{:href => "https://fifa.com", target: :blank, title: 'Переход на официальный сайт FIFA'}

@@ -8,12 +8,12 @@
 
   %td.text-left
     -if result.home_team.present?
-      =link_to result.home_team.name, team_path(result.home_team.id), target: :blank
+      =result.home_team.name
 
 
       %br
       %br
-        =link_to result.guest_team.name, team_path(result.guest_team.id), target: :blank
+        =result.guest_team.name
   %td  
     -if result.result.present?
       

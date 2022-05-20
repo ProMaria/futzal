@@ -16,7 +16,8 @@
       -else
         %h3 #{@league_name}. Положение команд сезона #{League.unscoped.find(params[:id]).season.name}
       =render 'nav'
-      %table.table.table-condensed.table-bordered
+
+      %table.table.table-condensed.table-bordered{class: @league_name =='Высшая лига' ? 'leader_league' :'first_league'}
         %tr
           %td.text-center место
           %td.text-center команда
@@ -31,7 +32,7 @@
 
 
         -@table_results.each do |team|
-          %tr{class: (team.score !=0 and counter >0) ? 'leader_team' :''}
+          %tr
             
             %td.text-center=team.place
             %td.text-center
