@@ -11,7 +11,7 @@
     -else
       %h3 #{@league_name}. Бомбардиры сезона #{League.unscoped.find(params[:id]).season.name}
     =render 'nav'
-    -max_goal = @leaders[0].goal
+    -max_goal = @leaders.length() > 0 ? @leaders[0].goal : 0 
     -place = 1
     %table.table.table-hover{class: @league_name =='Высшая лига' ? 'leader_league' :'first_league'}
       %tr
