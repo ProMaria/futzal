@@ -11,15 +11,19 @@
     -else
       %h3 #{@league_name}. Бомбардиры сезона #{League.unscoped.find(params[:id]).season.name}
     =render 'nav'
-    %table.table.table-hover
-      %tr.active
+    -max_goal = @leaders[0].goal
+    -place = 1
+    %table.table.table-hover{class: @league_name =='Высшая лига' ? 'leader_league' :'first_league'}
+      %tr
         %td
         %td.text-center игрок
         %td.text-center команда
         %td.text-center голы
       -@leaders.each_with_index do |leader, index|
+        - place = max_goal == leader.goal ? place : place + 1
+        - max_goal = max_goal == leader.goal ? max_goal : leader.goal
         %tr
-          %td.text-center=index+1
+          %td.text-center=place
           %td.text-center=leader.fio
           %td.text-center=Team.unscoped.find(leader.team_id).name
           %td.text-center=leader.goal
