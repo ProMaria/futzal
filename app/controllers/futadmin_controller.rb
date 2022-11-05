@@ -57,6 +57,13 @@ class FutadminController < ApplicationController
                             place+=1
                             home_rec.update_attribute(:place, place)
                         end
+                    else
+                        result.update_attribute(:place, place)
+                        place+=1
+                        # наибольшее число побед во всех встречах
+                        # лучшая разница мячей во всех встречах
+                        # наибольшее количество забитых мячей во всех встречах
+                
                     end
                 else
                     result.update_attribute(:place, place)
