@@ -27,14 +27,14 @@ class FutadminController < ApplicationController
                 the_same_score_teams = TableResult.where(league_id: params[:league_id], score: team_score)  
                    
                 if the_same_score_teams.count == 2
-                    puts '*/***********'
+                    puts '*/***********' + 'place=' + place.to_s
                     team_ids = the_same_score_teams.pluck(:team_id)
                     # приоритеты: 
                     # результат личной встречи
                     result_versus = Schedule.where(home_team_id: team_ids, guest_team_id: team_ids)
                     
                     if result_versus.pluck(:result).count == 1
-                        #puts '------------------------------------' + result_versus.pluck(:result).count.to_s
+                        puts '------------------------------------' + result_versus.pluck(:result).count.to_s
                         result_versus = result_versus.first
                         #puts '////' + result_versus.result.to_s
                         home_team_id = result_versus.home_team_id
@@ -46,24 +46,34 @@ class FutadminController < ApplicationController
                         home_rec = the_same_score_teams.where(team_id: home_team_id).first
                         guest_rec = the_same_score_teams.where(team_id: guest_team_id).first
 
-                        if result_versus.result.present? && home_score > guest_score
-                            #puts '11111111111111111'
+                        if result_versus.result.present? && home_score > guest_score && home_rec.place.nil?
+                            puts '11111111111111111' +'place=' + place.to_s + 'home_rec_place = '+ home_rec.place.to_s
                             home_rec.update_attribute(:place, place)
                             place+=1
                             guest_rec.update_attribute(:place, place)
-                        elsif result_versus.result.present? && home_score < guest_score
-                           # puts '2222222222222222'
+                        elsif result_versus.result.present? && home_score < guest_score && guest_rec.place.nil?
+                            puts '2222222222222222'+'place=' + place.to_s + 'guest_rec_place = '+ guest_rec.place.to_s
                             guest_rec.update_attribute(:place, place)
                             place+=1
                             home_rec.update_attribute(:place, place)
+                        
+                        elsif result.place.nil?
+                            puts '33333333333333'+'place=' + place.to_s
+                            result.update_attribute(:place, place)
+                            place+=1
+                            # наибольшее число побед во всех встречах
+                            # лучшая разница мячей во всех встречах
+                            # наибольшее количество забитых мячей во всех встречах
+                    
                         end
                     else
-                        result.update_attribute(:place, place)
-                        place+=1
-                        # наибольшее число побед во всех встречах
-                        # лучшая разница мячей во всех встречах
-                        # наибольшее количество забитых мячей во всех встречах
-                
+                            result.update_attribute(:place, place)
+                            place+=1
+                            # наибольшее число побед во всех встречах
+                            # лучшая разница мячей во всех встречах
+                            # наибольшее количество забитых мячей во всех встречах
+                    
+                        
                     end
                 else
                     result.update_attribute(:place, place)
