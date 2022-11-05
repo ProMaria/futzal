@@ -27,6 +27,7 @@ class FutadminController < ApplicationController
                 the_same_score_teams = TableResult.where(league_id: params[:league_id], score: team_score)  
                    
                 if the_same_score_teams.count == 2
+                    
                     team_ids = the_same_score_teams.pluck(:team_id)
                     # приоритеты: 
                     # результат личной встречи
@@ -35,10 +36,10 @@ class FutadminController < ApplicationController
                     if result_versus.pluck(:result).count == 1
                         result_versus = result_versus.first
                         home_team_id = result_versus.home_team_id
-                        home_score = result_versus.split(':')[0]
+                        home_score = result_versus.result.split(':')[0]
 
                         guest_team_id = result_versus.guest_team_id
-                        guest_score = result_versus.split(':')[1]
+                        guest_score = result_versus.result.split(':')[1]
 
                         home_rec = the_same_score_teams.where(team_id: home_team_id).first
                         guest_rec = the_same_score_teams.where(team_id: guest_team_id).first
