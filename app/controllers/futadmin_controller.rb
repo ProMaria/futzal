@@ -27,28 +27,32 @@ class FutadminController < ApplicationController
                 the_same_score_teams = TableResult.where(league_id: params[:league_id], score: team_score)  
                    
                 if the_same_score_teams.count == 2
-                    
+                    puts '*/***********'
                     team_ids = the_same_score_teams.pluck(:team_id)
                     # приоритеты: 
                     # результат личной встречи
                     result_versus = Schedule.where(home_team_id: team_ids, guest_team_id: team_ids)
                     
                     if result_versus.pluck(:result).count == 1
+                        #puts '------------------------------------' + result_versus.pluck(:result).count.to_s
                         result_versus = result_versus.first
+                        #puts '////' + result_versus.result.to_s
                         home_team_id = result_versus.home_team_id
-                        home_score = result_versus.result.split(':')[0]
+                        home_score = result_versus.result.split(':')[0] if result_versus.result.present?
 
                         guest_team_id = result_versus.guest_team_id
-                        guest_score = result_versus.result.split(':')[1]
+                        guest_score = result_versus.result.split(':')[1] if result_versus.result.present?
 
                         home_rec = the_same_score_teams.where(team_id: home_team_id).first
                         guest_rec = the_same_score_teams.where(team_id: guest_team_id).first
 
-                        if home_score > guest_score
+                        if result_versus.result.present? && home_score > guest_score
+                            #puts '11111111111111111'
                             home_rec.update_attribute(:place, place)
                             place+=1
                             guest_rec.update_attribute(:place, place)
-                        elsif home_score < guest_score
+                        elsif result_versus.result.present? && home_score < guest_score
+                           # puts '2222222222222222'
                             guest_rec.update_attribute(:place, place)
                             place+=1
                             home_rec.update_attribute(:place, place)
