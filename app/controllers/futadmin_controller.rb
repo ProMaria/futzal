@@ -16,7 +16,7 @@ class FutadminController < ApplicationController
                                 sub_ball: counter_ball_create- counter_ball_lost)              
         end 
         place = 1
-        table_results = TableResult.where(league_id: params[:league_id]).pluck(:score).uniq()
+        table_results = TableResult.where(league_id: params[:league_id]).distinct.pluck(:score)
 
         if table_results.present?
             
@@ -55,11 +55,15 @@ class FutadminController < ApplicationController
                                 home_rec.update_attribute(:place, place)
                                 place+=1
                                 guest_rec.update_attribute(:place, place)
+                                place+=1
+                                break
                             elsif result_versus.result.present? && home_score < guest_score && guest_rec.place.nil?
                                 #puts '2222222222222222'+'place=' + place.to_s + 'guest_rec_place = '+ guest_rec.place.to_s
                                 guest_rec.update_attribute(:place, place)
                                 place+=1
                                 home_rec.update_attribute(:place, place)
+                                place+=1
+                                break
                             
                             elsif result.place.nil?
                                 #puts '33333333333333'+'place=' + place.to_s
@@ -71,6 +75,7 @@ class FutadminController < ApplicationController
                         
                             end
                         else
+                                #puts '4444444444444'+'place=' + place.to_s
                                 result.update_attribute(:place, place)
                                 place+=1
                                 # наибольшее число побед во всех встречах

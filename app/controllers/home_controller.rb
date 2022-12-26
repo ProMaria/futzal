@@ -19,7 +19,7 @@ class HomeController < ApplicationController
       # end
 
       @last_games = Schedule.where("timestamp between ? AND ?", Date.today - 7, Date.today)
-      @future_games = Schedule.where("timestamp between ? AND ? or timestamp is null", Date.today+1, Date.today + 7)
+      @future_games = Schedule.where("timestamp between ? AND ? or timestamp is null", Date.today+1, Date.today + 30)
       @current_games = Schedule.where("timestamp between ? AND ?", Date.today, Date.today+1)
        
   end
