@@ -52,16 +52,16 @@ class FutadminController < ApplicationController
 
                             if result_versus.result.present? && home_score > guest_score && home_rec.place.nil?
                                 #puts '11111111111111111' +'place=' + place.to_s + 'home_rec_place = '+ home_rec.place.to_s
-                                home_rec.update_attribute(:place, place)
-                                place+=1
                                 guest_rec.update_attribute(:place, place)
+                                place+=1
+                                home_rec.update_attribute(:place, place)
                                 place+=1
                                 break
                             elsif result_versus.result.present? && home_score < guest_score && guest_rec.place.nil?
                                 #puts '2222222222222222'+'place=' + place.to_s + 'guest_rec_place = '+ guest_rec.place.to_s
-                                guest_rec.update_attribute(:place, place)
-                                place+=1
                                 home_rec.update_attribute(:place, place)
+                                place+=1
+                                guest_rec.update_attribute(:place, place)
                                 place+=1
                                 break
                             
@@ -75,7 +75,7 @@ class FutadminController < ApplicationController
                         
                             end
                         else
-                                #puts '4444444444444'+'place=' + place.to_s
+                                puts '4444444444444'+'place=' + place.to_s
                                 result.update_attribute(:place, place)
                                 place+=1
                                 # наибольшее число побед во всех встречах
